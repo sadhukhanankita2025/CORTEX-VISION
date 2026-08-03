@@ -16,7 +16,7 @@ export const Footer: React.FC<FooterProps> = ({ setActivePage, onNavigate }) => 
   return (
     <footer className="bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800/80 text-slate-600 dark:text-slate-400 py-12 px-4 sm:px-6 lg:px-8 transition-colors relative overflow-hidden">
       {/* Subtle footer ambient background glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-32 bg-cyan-500/5 dark:bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-150 h-32 bg-cyan-500/5 dark:bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 relative z-10">
 

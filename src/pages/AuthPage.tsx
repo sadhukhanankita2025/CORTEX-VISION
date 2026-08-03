@@ -148,7 +148,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ onSuccess, authRequiredNotic
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute bottom-5 right-5 w-[500px] h-[500px] bg-indigo-500/25 rounded-full blur-3xl pointer-events-none -z-10"
+        className="absolute bottom-5 right-5 w-125 h-125 bg-indigo-500/25 rounded-full blur-3xl pointer-events-none -z-10"
       />
 
       <motion.div
@@ -163,7 +163,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ onSuccess, authRequiredNotic
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/15 rounded-full blur-3xl pointer-events-none -z-10"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-purple-500/15 rounded-full blur-3xl pointer-events-none -z-10"
       />
 
       {/* CENTERED CONTAINER FOR AUTH FORM */}
