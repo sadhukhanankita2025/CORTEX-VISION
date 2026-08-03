@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+/* DAY / LIGHT MODE & DARK MODE GLOBAL BASE STYLES */
+html.light, html.theme-light {
+  color-scheme: light;
+}
+
+html.light body, .theme-light, .app-theme-light {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* Ensure headings and body text in light mode have rich dark slate contrast */
+.theme-light h1,
+.theme-light h2,
+.theme-light h3,
+.theme-light h4,
+.theme-light h5,
+.theme-light h6 {
+  color: #0f172a;
+}
+
+/* Form inputs styling in Light Mode */
+.theme-light input,
+.theme-light select,
+.theme-light textarea {
+  background-color: #ffffff;
+  color: #0f172a;
+  border-color: #cbd5e1;
+}
+
+.theme-light input::placeholder,
+.theme-light textarea::placeholder {
+  color: #64748b;
+}
+
+/* Light Mode Enhanced Page Box Shadows for Cards & Panels */
+.theme-light .shadow-xl,
+.theme-light .shadow-2xl,
+.theme-light .shadow-lg,
+.theme-light .shadow-md {
+  box-shadow: 0 10px 30px -5px rgba(37, 99, 235, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.06);
+}
+
+/* CTA Card text remains crisp white in both dark and light modes */
+.cta-card-white-text,
+.cta-card-white-text h2,
+.cta-card-white-text p,
+.cta-card-white-text span,
+.theme-light .cta-card-white-text,
+.theme-light .cta-card-white-text h2,
+.theme-light .cta-card-white-text p,
+.theme-light .cta-card-white-text span {
+  color: #ffffff !important;
+}
+
+/* ENHANCED ANIMATIONS & GLOW EFFECTS */
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.8s infinite;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 15px rgba(6, 182, 212, 0.4)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 28px rgba(6, 182, 212, 0.8)); }
+}
+
+@keyframes popup-scale {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.02); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-float-slow {
+  animation: float-slow 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-popup {
+  animation: popup-scale 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Glow shadow utilities */
+.glow-cyan {
+  box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.4), 0 0 10px -2px rgba(6, 182, 212, 0.2);
+}
+
+.glow-indigo {
+  box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.4), 0 0 10px -2px rgba(99, 102, 241, 0.2);
+}
+
+.glow-purple {
+  box-shadow: 0 0 25px -5px rgba(168, 85, 247, 0.4), 0 0 10px -2px rgba(168, 85, 247, 0.2);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.4), 0 0 10px -2px rgba(16, 185, 129, 0.2);
+}
+
+.glow-cyan-hover:hover {
+  box-shadow: 0 0 35px -2px rgba(6, 182, 212, 0.6), 0 0 15px 0px rgba(6, 182, 212, 0.4);
+}
+
+.glow-indigo-hover:hover {
+  box-shadow: 0 0 35px -2px rgba(99, 102, 241, 0.6), 0 0 15px 0px rgba(99, 102, 241, 0.4);
+}
+
+.glow-purple-hover:hover {
+  box-shadow: 0 0 35px -2px rgba(168, 85, 247, 0.6), 0 0 15px 0px rgba(168, 85, 247, 0.4);
+}
+
+.glow-emerald-hover:hover {
+  box-shadow: 0 0 35px -2px rgba(16, 185, 129, 0.6), 0 0 15px 0px rgba(16, 185, 129, 0.4);
+}
