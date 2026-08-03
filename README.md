@@ -1,4 +1,4 @@
-# NeuroVision XAI
+# CORTEX-VISION
 
 AI-powered Brain Tumor MRI Classification and Explainability System using React, TypeScript, Vite, Tailwind CSS, Flask, and PyTorch. 
 ## Technologies Used
