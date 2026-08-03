@@ -38,7 +38,7 @@ export const Contact: React.FC = () => {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute top-10 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-cyan-500/20 rounded-full blur-3xl pointer-events-none -z-10"
+        className="absolute top-10 left-1/2 -translate-x-1/2 w-125 h-75 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none -z-10"
       />
 
       <div className="text-center max-w-2xl mx-auto space-y-2">

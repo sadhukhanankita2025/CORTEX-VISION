@@ -93,7 +93,7 @@ export const History: React.FC<HistoryProps> = ({ onViewReport }) => {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute top-20 right-10 w-[550px] h-[350px] bg-linear-to-l from-cyan-500/20 via-purple-500/20 to-indigo-500/15 rounded-full blur-3xl pointer-events-none -z-10"
+        className="absolute top-20 right-10 w-137.5 h-87.5 bg-linear-to-l from-cyan-500/20 via-purple-500/20 to-indigo-500/15 rounded-full blur-3xl pointer-events-none -z-10"
       />
 
       {/* Title Header */}
@@ -213,8 +213,8 @@ export const History: React.FC<HistoryProps> = ({ onViewReport }) => {
                     {/* Prediction Class Badge */}
                     <td className="px-6 py-4 font-mono">
                       <span className={`inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold border shadow-sm ${item.tumorDetected
-                          ? 'bg-rose-500/10 text-rose-800 dark:text-rose-300 border-rose-500/40 shadow-rose-500/10'
-                          : 'bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border-emerald-500/40 shadow-emerald-500/10'
+                        ? 'bg-rose-500/10 text-rose-800 dark:text-rose-300 border-rose-500/40 shadow-rose-500/10'
+                        : 'bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border-emerald-500/40 shadow-emerald-500/10'
                         }`}>
                         {item.tumorDetected ? <AlertTriangle className="w-3 h-3 text-rose-600 dark:text-rose-400" /> : <CheckCircle2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />}
                         <span>{item.predictionClass}</span>

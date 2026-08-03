@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import type { Variants } from 'framer-motion';
 import { Brain3DVisualizer } from '../components/Brain3DVisualizer';
 import { CtaSection } from '../components/CtaSection';
 import {
@@ -28,7 +29,7 @@ export const Home: React.FC<HomeProps> = ({
   };
 
   // Stagger container animation variant
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -39,7 +40,7 @@ export const Home: React.FC<HomeProps> = ({
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 25 },
     visible: {
       opacity: 1,
@@ -61,7 +62,7 @@ export const Home: React.FC<HomeProps> = ({
             opacity: [0.15, 0.35, 0.15]
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-cyan-500/20 dark:bg-cyan-500/25 rounded-full blur-[130px] pointer-events-none"
+          className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-162.5 h-162.5 bg-cyan-500/20 dark:bg-cyan-500/25 rounded-full blur-[130px] pointer-events-none"
         />
         <motion.div
           animate={{
@@ -70,7 +71,7 @@ export const Home: React.FC<HomeProps> = ({
             opacity: [0.1, 0.3, 0.1]
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute top-1/3 right-10 w-[450px] h-[450px] bg-indigo-500/20 dark:bg-indigo-500/25 rounded-full blur-[110px] pointer-events-none"
+          className="absolute top-1/3 right-10 w-112.5 h-112.5 bg-indigo-500/20 dark:bg-indigo-500/25 rounded-full blur-[110px] pointer-events-none"
         />
 
         {/* Dark Mode Floating Cyber Particles */}
@@ -213,6 +214,7 @@ export const Home: React.FC<HomeProps> = ({
       </section>
 
       {/* SYSTEM WORKFLOW ARCHITECTURE SECTION */}
+      {/* SYSTEM WORKFLOW ARCHITECTURE SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -238,119 +240,37 @@ export const Home: React.FC<HomeProps> = ({
             </p>
           </div>
 
-          {/* HORIZONTAL WORKFLOW STEPS (DESKTOP) */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            className="hidden lg:grid grid-cols-4 gap-6 relative"
-          >
-
-            {/* Step 1: Upload MRI */}
-            <motion.div
-              variants={itemVariants}
-              whileHover={{ scale: 1.05, y: -6 }}
-              className="p-6 rounded-3xl bg-white dark:bg-slate-950 border border-cyan-300 dark:border-cyan-500/40 glow-cyan glow-cyan-hover transition-all duration-300 space-y-3 group text-center relative z-10 overflow-hidden shadow-md dark:shadow-none"
-            >
-              <div className="absolute -top-10 -right-10 w-24 h-24 bg-cyan-500/20 rounded-full blur-xl group-hover:scale-150 transition-transform pointer-events-none" />
-              <div className="w-14 h-14 mx-auto rounded-2xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-cyan-500 group-hover:text-slate-950 transition-all shadow-lg shadow-cyan-500/20">
-                <Upload className="w-7 h-7" />
-              </div>
-              <div className="inline-block px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 font-mono text-[10px] font-bold border border-cyan-500/30">
-                STEP 01
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-wide">Upload MRI</h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Drag &amp; drop brain MRI scans (PNG, JPG, JPEG) or select sample scans.
-              </p>
-            </motion.div>
-
-            {/* Step 2: Fill Patient Details */}
-            <motion.div
-              variants={itemVariants}
-              whileHover={{ scale: 1.05, y: -6 }}
-              className="p-6 rounded-3xl bg-white dark:bg-slate-950 border border-indigo-300 dark:border-indigo-500/40 glow-indigo glow-indigo-hover transition-all duration-300 space-y-3 group text-center relative z-10 overflow-hidden shadow-md dark:shadow-none"
-            >
-              <div className="absolute -top-10 -right-10 w-24 h-24 bg-indigo-500/20 rounded-full blur-xl group-hover:scale-150 transition-transform pointer-events-none" />
-              <div className="w-14 h-14 mx-auto rounded-2xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-indigo-500 group-hover:text-slate-950 transition-all shadow-lg shadow-indigo-500/20">
-                <UserCheck className="w-7 h-7" />
-              </div>
-              <div className="inline-block px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 font-mono text-[10px] font-bold border border-indigo-500/30">
-                STEP 02
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-wide">Fill Patient Details</h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Enter patient ID, practitioner name, hospital center, and clinical notes.
-              </p>
-            </motion.div>
-
-            {/* Step 3: shows Prediction */}
-            <motion.div
-              variants={itemVariants}
-              whileHover={{ scale: 1.05, y: -6 }}
-              className="p-6 rounded-3xl bg-white dark:bg-slate-950 border border-purple-300 dark:border-purple-500/40 glow-purple glow-purple-hover transition-all duration-300 space-y-3 group text-center relative z-10 overflow-hidden shadow-md dark:shadow-none"
-            >
-              <div className="absolute -top-10 -right-10 w-24 h-24 bg-purple-500/20 rounded-full blur-xl group-hover:scale-150 transition-transform pointer-events-none" />
-              <div className="w-14 h-14 mx-auto rounded-2xl bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-purple-500 group-hover:text-slate-950 transition-all shadow-lg shadow-purple-500/20">
-                <Sparkles className="w-7 h-7 animate-pulse" />
-              </div>
-              <div className="inline-block px-3 py-1 rounded-full bg-purple-500/20 text-purple-700 dark:text-purple-300 font-mono text-[10px] font-bold border border-purple-500/30">
-                STEP 03
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-wide">shows Prediction</h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Instant PyTorch model inference output showing tumor type and confidence score.
-              </p>
-            </motion.div>
-
-            {/* Step 4: User downloads Report */}
-            <motion.div
-              variants={itemVariants}
-              whileHover={{ scale: 1.05, y: -6 }}
-              className="p-6 rounded-3xl bg-white dark:bg-slate-950 border border-emerald-300 dark:border-emerald-500/40 glow-emerald glow-emerald-hover transition-all duration-300 space-y-3 group text-center relative z-10 overflow-hidden shadow-md dark:shadow-none"
-            >
-              <div className="absolute -top-10 -right-10 w-24 h-24 bg-emerald-500/20 rounded-full blur-xl group-hover:scale-150 transition-transform pointer-events-none" />
-              <div className="w-14 h-14 mx-auto rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-slate-950 transition-all shadow-lg shadow-emerald-500/20">
-                <FileDown className="w-7 h-7" />
-              </div>
-              <div className="inline-block px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-mono text-[10px] font-bold border border-emerald-500/30">
-                STEP 04
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-wide">User downloads Report</h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Generate and export printable HIPAA-compliant PDF medical diagnostic report.
-              </p>
-            </motion.div>
-
-          </motion.div>
-
           {/* VERTICAL DIAGRAM FLOW CARD */}
           <motion.div
             initial={{ opacity: 0, scale: 0.97 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="max-w-xl mx-auto p-6 rounded-3xl bg-sky-100/80 dark:bg-slate-950 border border-sky-300 dark:border-cyan-500/40 glow-cyan font-mono text-xs shadow-xl space-y-4 relative overflow-hidden"
+            className="max-w-xl mx-auto p-6 rounded-3xl bg-sky-100/80 dark:bg-slate-950 border border-sky-300 dark:border-cyan-500/40 glow-cyan font-sans text-xs shadow-xl space-y-4 relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
             <div className="text-center pb-3 border-b border-sky-200 dark:border-slate-800 text-cyan-700 dark:text-cyan-400 font-bold tracking-wider uppercase flex items-center justify-center space-x-2">
               <Sparkles className="w-4 h-4 text-cyan-600 dark:text-cyan-400 animate-pulse" />
-              <span>Clinical Pipeline Diagram</span>
+              <span>VERTICAL DIAGRAM FLOW CARD</span>
             </div>
 
             <div className="flex flex-col items-center space-y-2 relative z-10">
 
               {/* Node 1 */}
               <motion.div
-                whileHover={{ scale: 1.04, x: 3 }}
-                className="w-full max-w-sm py-3 px-4 rounded-xl bg-white dark:bg-slate-900 border border-cyan-300 dark:border-cyan-500/50 text-slate-900 dark:text-white font-bold flex items-center justify-between shadow-md transition-all cursor-pointer group"
+                whileHover={{ scale: 1.02, x: 3 }}
+                className="w-full max-w-md p-4 rounded-xl bg-white dark:bg-slate-900 border border-cyan-300 dark:border-cyan-500/50 text-slate-900 dark:text-white shadow-md transition-all cursor-pointer group space-y-1.5"
               >
-                <span className="flex items-center space-x-2">
-                  <Upload className="w-4 h-4 text-cyan-600 dark:text-cyan-400 group-hover:scale-125 transition-transform" />
-                  <span>Upload MRI</span>
-                </span>
-                <span className="text-[10px] text-cyan-700 dark:text-cyan-300 bg-cyan-500/20 px-2 py-0.5 rounded font-bold border border-cyan-500/30">01</span>
+                <div className="flex items-center justify-between">
+                  <span className="flex items-center space-x-2.5 font-bold text-sm text-slate-900 dark:text-white">
+                    <Upload className="w-4 h-4 text-cyan-600 dark:text-cyan-400 group-hover:scale-125 transition-transform shrink-0" />
+                    <span>Upload MRI</span>
+                  </span>
+                  <span className="text-[10px] text-cyan-700 dark:text-cyan-300 bg-cyan-500/20 px-2 py-0.5 rounded font-mono font-bold border border-cyan-500/30">01</span>
+                </div>
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed pl-6">
+                  Drag &amp; drop brain MRI scans (PNG, JPG, JPEG) or select sample scans.
+                </p>
               </motion.div>
 
               {/* Arrow */}
@@ -361,14 +281,19 @@ export const Home: React.FC<HomeProps> = ({
 
               {/* Node 2 */}
               <motion.div
-                whileHover={{ scale: 1.04, x: 3 }}
-                className="w-full max-w-sm py-3 px-4 rounded-xl bg-white dark:bg-slate-900 border border-indigo-300 dark:border-indigo-500/50 text-slate-900 dark:text-white font-bold flex items-center justify-between shadow-md transition-all cursor-pointer group"
+                whileHover={{ scale: 1.02, x: 3 }}
+                className="w-full max-w-md p-4 rounded-xl bg-white dark:bg-slate-900 border border-indigo-300 dark:border-indigo-500/50 text-slate-900 dark:text-white shadow-md transition-all cursor-pointer group space-y-1.5"
               >
-                <span className="flex items-center space-x-2">
-                  <UserCheck className="w-4 h-4 text-indigo-600 dark:text-indigo-400 group-hover:scale-125 transition-transform" />
-                  <span>Fill Patient Details</span>
-                </span>
-                <span className="text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-500/20 px-2 py-0.5 rounded font-bold border border-indigo-500/30">02</span>
+                <div className="flex items-center justify-between">
+                  <span className="flex items-center space-x-2.5 font-bold text-sm text-slate-900 dark:text-white">
+                    <UserCheck className="w-4 h-4 text-indigo-600 dark:text-indigo-400 group-hover:scale-125 transition-transform shrink-0" />
+                    <span>Fill Patient Details</span>
+                  </span>
+                  <span className="text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-500/20 px-2 py-0.5 rounded font-mono font-bold border border-indigo-500/30">02</span>
+                </div>
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed pl-6">
+                  Enter patient ID, practitioner name, hospital center, and clinical notes.
+                </p>
               </motion.div>
 
               {/* Arrow */}
@@ -379,14 +304,19 @@ export const Home: React.FC<HomeProps> = ({
 
               {/* Node 3 */}
               <motion.div
-                whileHover={{ scale: 1.04, x: 3 }}
-                className="w-full max-w-sm py-3 px-4 rounded-xl bg-white dark:bg-slate-900 border border-purple-300 dark:border-purple-500/50 text-slate-900 dark:text-white font-bold flex items-center justify-between shadow-md transition-all cursor-pointer group"
+                whileHover={{ scale: 1.02, x: 3 }}
+                className="w-full max-w-md p-4 rounded-xl bg-white dark:bg-slate-900 border border-purple-300 dark:border-purple-500/50 text-slate-900 dark:text-white shadow-md transition-all cursor-pointer group space-y-1.5"
               >
-                <span className="flex items-center space-x-2">
-                  <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400 group-hover:scale-125 transition-transform" />
-                  <span>shows Prediction</span>
-                </span>
-                <span className="text-[10px] text-purple-700 dark:text-purple-300 bg-purple-500/20 px-2 py-0.5 rounded font-bold border border-purple-500/30">03</span>
+                <div className="flex items-center justify-between">
+                  <span className="flex items-center space-x-2.5 font-bold text-sm text-slate-900 dark:text-white">
+                    <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400 group-hover:scale-125 transition-transform shrink-0" />
+                    <span>shows Prediction</span>
+                  </span>
+                  <span className="text-[10px] text-purple-700 dark:text-purple-300 bg-purple-500/20 px-2 py-0.5 rounded font-mono font-bold border border-purple-500/30">03</span>
+                </div>
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed pl-6">
+                  Instant PyTorch model inference output showing tumor type and confidence score.
+                </p>
               </motion.div>
 
               {/* Arrow */}
@@ -397,14 +327,19 @@ export const Home: React.FC<HomeProps> = ({
 
               {/* Node 4 */}
               <motion.div
-                whileHover={{ scale: 1.04, x: 3 }}
-                className="w-full max-w-sm py-3 px-4 rounded-xl bg-white dark:bg-slate-900 border border-emerald-300 dark:border-emerald-500/50 text-slate-900 dark:text-white font-bold flex items-center justify-between shadow-md transition-all cursor-pointer group"
+                whileHover={{ scale: 1.02, x: 3 }}
+                className="w-full max-w-md p-4 rounded-xl bg-white dark:bg-slate-900 border border-emerald-300 dark:border-emerald-500/50 text-slate-900 dark:text-white shadow-md transition-all cursor-pointer group space-y-1.5"
               >
-                <span className="flex items-center space-x-2">
-                  <FileDown className="w-4 h-4 text-emerald-600 dark:text-emerald-400 group-hover:scale-125 transition-transform" />
-                  <span>User downloads Report</span>
-                </span>
-                <span className="text-[10px] text-emerald-700 dark:text-emerald-300 bg-emerald-500/20 px-2 py-0.5 rounded font-bold border border-emerald-500/30">04</span>
+                <div className="flex items-center justify-between">
+                  <span className="flex items-center space-x-2.5 font-bold text-sm text-slate-900 dark:text-white">
+                    <FileDown className="w-4 h-4 text-emerald-600 dark:text-emerald-400 group-hover:scale-125 transition-transform shrink-0" />
+                    <span>User downloads Report</span>
+                  </span>
+                  <span className="text-[10px] text-emerald-700 dark:text-emerald-300 bg-emerald-500/20 px-2 py-0.5 rounded font-mono font-bold border border-emerald-500/30">04</span>
+                </div>
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed pl-6">
+                  Generate and export printable HIPAA-compliant PDF medical diagnostic report.
+                </p>
               </motion.div>
 
             </div>
@@ -423,245 +358,6 @@ export const Home: React.FC<HomeProps> = ({
 
           </motion.div>
 
-        </motion.div>
-      </section>
-
-      {/* STATISTICS SECTION - REDESIGNED MODERN CLINICAL IMPACT GRID */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6 }}
-          className="p-8 sm:p-12 rounded-3xl bg-blue-50/90 dark:bg-slate-950/90 border border-blue-200 dark:border-slate-800 shadow-[0_20px_60px_rgba(6,182,212,0.12)] backdrop-blur-2xl relative overflow-hidden space-y-8"
-        >
-
-          {/* Subtle Ambient Background Glowing Lights */}
-          <div className="absolute -top-24 left-1/3 w-96 h-96 bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
-          <div className="absolute -bottom-24 right-1/3 w-96 h-96 bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
-          <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-cyan-400 via-purple-500 to-purple-500" />
-
-          {/* Section Header */}
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b border-blue-200/80 dark:border-slate-800/80 relative z-10">
-            <div className="space-y-1">
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-600/30 dark:border-cyan-500/30 text-cyan-700 dark:text-cyan-400 text-xs font-mono font-bold">
-                <span className="w-2 h-2 rounded-full bg-cyan-600 dark:bg-cyan-400 animate-ping" />
-                <span>REAL-TIME PLATFORM TELEMETRY</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-blue-600 dark:text-white tracking-tight">
-                Clinical Impact &amp; Performance
-              </h2>
-            </div>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-md font-sans leading-relaxed">
-              Real-time analytics aggregated across clinical partner institutions and edge deployment inference nodes.
-            </p>
-          </div>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10"
-          >
-
-            {/* 1. Patients Analysed */}
-            <motion.div
-              variants={itemVariants}
-              whileHover={{ scale: 1.04, y: -6 }}
-              className="p-6 rounded-2xl bg-white dark:bg-slate-950/90 border border-sky-300 dark:border-cyan-500/30 hover:border-cyan-500 dark:hover:border-cyan-400 shadow-xl hover:shadow-[0_15px_35px_rgba(6,182,212,0.25)] transition-all duration-300 group relative overflow-hidden space-y-4"
-            >
-              <div className="absolute top-0 right-0 w-28 h-28 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none group-hover:scale-150 transition-transform" />
-
-              <div className="flex items-center justify-between">
-                <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30 group-hover:bg-cyan-500 group-hover:text-slate-950 transition-all duration-300 shadow-lg shadow-cyan-500/10">
-                  <Users className="w-6 h-6" />
-                </div>
-                <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">
-                  ↑ +24% YoY
-                </span>
-              </div>
-
-              <div>
-                <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white font-mono tracking-tight group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
-                  12,450+
-                </div>
-                <div className="text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400 font-bold mt-1 group-hover:text-cyan-800 dark:group-hover:text-cyan-200 transition-colors">
-                  Patients Analysed
-                </div>
-              </div>
-
-              {/* Progress bar indicator */}
-              <div className="space-y-1.5 pt-2">
-                <div className="flex justify-between text-[10px] font-mono text-slate-500">
-                  <span>Capacity Utilized</span>
-                  <span className="text-cyan-400 font-bold">88%</span>
-                </div>
-                <div className="w-full h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "88%" }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.3 }}
-                    className="h-full bg-linear-to-r from-cyan-500 to-indigo-500 rounded-full group-hover:brightness-125 transition-all"
-                  />
-                </div>
-              </div>
-
-              <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono pt-1 flex items-center space-x-1">
-                <CheckCircle2 className="w-3 h-3 text-cyan-500 dark:text-cyan-400" />
-                <span>Multi-center cohort verified</span>
-              </div>
-            </motion.div>
-
-            {/* 2. Predictions Run */}
-            <motion.div
-              variants={itemVariants}
-              whileHover={{ scale: 1.04, y: -6 }}
-              className="p-6 rounded-2xl bg-white dark:bg-slate-950/90 border border-indigo-200 dark:border-indigo-500/30 hover:border-indigo-400 shadow-xl hover:shadow-[0_15px_35px_rgba(99,102,241,0.25)] transition-all duration-300 group relative overflow-hidden space-y-4"
-            >
-              <div className="absolute top-0 right-0 w-28 h-28 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none group-hover:scale-150 transition-transform" />
-
-              <div className="flex items-center justify-between">
-                <div className="p-3 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/30 group-hover:bg-indigo-500 group-hover:text-slate-950 transition-all duration-300 shadow-lg shadow-indigo-500/10">
-                  <Activity className="w-6 h-6" />
-                </div>
-                <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">
-                  Sub-Second
-                </span>
-              </div>
-
-              <div>
-                <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white font-mono tracking-tight group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">
-                  18,920+
-                </div>
-                <div className="text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400 font-bold mt-1 group-hover:text-indigo-800 dark:group-hover:text-indigo-200 transition-colors">
-                  Predictions Run
-                </div>
-              </div>
-
-              {/* Progress bar indicator */}
-              <div className="space-y-1.5 pt-2">
-                <div className="flex justify-between text-[10px] font-mono text-slate-500">
-                  <span>Inference Throughput</span>
-                  <span className="text-indigo-600 dark:text-indigo-400 font-bold">95.4%</span>
-                </div>
-                <div className="w-full h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "95%" }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.4 }}
-                    className="h-full bg-linear-to-r from-indigo-500 to-purple-500 rounded-full group-hover:brightness-125 transition-all"
-                  />
-                </div>
-              </div>
-
-              <div className="text-[10px] text-slate-600 dark:text-slate-400 font-mono pt-1 flex items-center space-x-1">
-                <Zap className="w-3 h-3 text-indigo-600 dark:text-indigo-400" />
-                <span>0.82s avg response latency</span>
-              </div>
-            </motion.div>
-
-            {/* 3. Reports Generated */}
-            <motion.div
-              variants={itemVariants}
-              whileHover={{ scale: 1.04, y: -6 }}
-              className="p-6 rounded-2xl bg-white dark:bg-slate-950/90 border border-purple-200 dark:border-purple-500/30 hover:border-purple-400 shadow-xl hover:shadow-[0_15px_35px_rgba(168,85,247,0.25)] transition-all duration-300 group relative overflow-hidden space-y-4"
-            >
-              <div className="absolute top-0 right-0 w-28 h-28 bg-purple-500/10 rounded-full blur-2xl pointer-events-none group-hover:scale-150 transition-transform" />
-
-              <div className="flex items-center justify-between">
-                <div className="p-3 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/30 group-hover:bg-purple-500 group-hover:text-slate-950 transition-all duration-300 shadow-lg shadow-purple-500/10">
-                  <FileCheck2 className="w-6 h-6" />
-                </div>
-                <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20">
-                  PDF &amp; Print
-                </span>
-              </div>
-
-              <div>
-                <div className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white font-mono tracking-tight group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors">
-                  14,300+
-                </div>
-                <div className="text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400 font-bold mt-1 group-hover:text-purple-800 dark:group-hover:text-purple-200 transition-colors">
-                  Reports Generated
-                </div>
-              </div>
-
-              {/* Progress bar indicator */}
-              <div className="space-y-1.5 pt-2">
-                <div className="flex justify-between text-[10px] font-mono text-slate-500">
-                  <span>Export Compliance</span>
-                  <span className="text-purple-600 dark:text-purple-400 font-bold">100%</span>
-                </div>
-                <div className="w-full h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "100%" }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.5 }}
-                    className="h-full bg-linear-to-r from-purple-500 to-pink-500 rounded-full group-hover:brightness-125 transition-all"
-                  />
-                </div>
-              </div>
-
-              <div className="text-[10px] text-slate-600 dark:text-slate-400 font-mono pt-1 flex items-center space-x-1">
-                <ShieldCheck className="w-3 h-3 text-purple-600 dark:text-purple-400" />
-                <span>HIPAA anonymization ready</span>
-              </div>
-            </motion.div>
-
-            {/* 4. Model Accuracy */}
-            <motion.div
-              variants={itemVariants}
-              whileHover={{ scale: 1.04, y: -6 }}
-              className="p-6 rounded-2xl bg-white dark:bg-slate-950/90 border border-emerald-200 dark:border-emerald-500/30 hover:border-emerald-400 shadow-xl hover:shadow-[0_15px_35px_rgba(16,185,129,0.25)] transition-all duration-300 group relative overflow-hidden space-y-4"
-            >
-              <div className="absolute top-0 right-0 w-28 h-28 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none group-hover:scale-150 transition-transform" />
-
-              <div className="flex items-center justify-between">
-                <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 group-hover:bg-emerald-500 group-hover:text-slate-950 transition-all duration-300 shadow-lg shadow-emerald-500/10">
-                  <ShieldCheck className="w-6 h-6" />
-                </div>
-                <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
-                  PyTorch ResNet
-                </span>
-              </div>
-
-              <div>
-                <div className="text-3xl sm:text-4xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono tracking-tight group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors">
-                  94.81%
-                </div>
-                <div className="text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400 font-bold mt-1 group-hover:text-emerald-800 dark:group-hover:text-emerald-200 transition-colors">
-                  Model Accuracy
-                </div>
-              </div>
-
-              {/* Progress bar indicator */}
-              <div className="space-y-1.5 pt-2">
-                <div className="flex justify-between text-[10px] font-mono text-slate-500">
-                  <span>Validation Benchmark</span>
-                  <span className="text-emerald-600 dark:text-emerald-400 font-bold">94.8%</span>
-                </div>
-                <div className="w-full h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "94.8%" }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.6 }}
-                    className="h-full bg-linear-to-r from-emerald-500 to-teal-400 rounded-full group-hover:brightness-125 transition-all"
-                  />
-                </div>
-              </div>
-
-              <div className="text-[10px] text-slate-600 dark:text-slate-400 font-mono pt-1 flex items-center space-x-1">
-                <Cpu className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
-                <span>15,000+ MRI slices trained</span>
-              </div>
-            </motion.div>
-
-          </motion.div>
         </motion.div>
       </section>
 
@@ -760,6 +456,6 @@ export const Home: React.FC<HomeProps> = ({
       {/* CTA SECTION */}
       <CtaSection onStartPrediction={onStartPrediction} />
 
-    </div>
+    </div >
   );
 };

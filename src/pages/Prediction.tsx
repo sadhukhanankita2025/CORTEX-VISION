@@ -156,7 +156,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute -top-10 -left-10 w-[500px] h-[500px] bg-linear-to-r from-cyan-500/25 via-blue-500/20 to-indigo-500/20 rounded-full blur-3xl pointer-events-none -z-10"
+        className="absolute -top-10 -left-10 w-125 h-125 bg-linear-to-r from-cyan-500/25 via-blue-500/20 to-indigo-500/20 rounded-full blur-3xl pointer-events-none -z-10"
       />
 
       <motion.div
@@ -171,7 +171,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute top-1/2 -right-20 w-[600px] h-[600px] bg-linear-to-l from-purple-500/20 via-pink-500/15 to-cyan-500/20 rounded-full blur-3xl pointer-events-none -z-10"
+        className="absolute top-1/2 -right-20 w-150 h-150 bg-linear-to-l from-purple-500/20 via-pink-500/15 to-cyan-500/20 rounded-full blur-3xl pointer-events-none -z-10"
       />
 
       {/* Page Header */}
@@ -293,7 +293,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
                   {isImageLoading ? (
                     /* Subtle Skeleton Loader for Image Preview */
                     <div className="flex flex-col sm:flex-row items-center gap-4 w-full">
-                      <div className="relative w-36 h-36 rounded-xl overflow-hidden border-2 border-cyan-500/30 bg-slate-100 dark:bg-slate-900 flex-shrink-0 flex items-center justify-center">
+                      <div className="relative w-36 h-36 rounded-xl overflow-hidden border-2 border-cyan-500/30 bg-slate-100 dark:bg-slate-900 shrink-0 flex items-center justify-center">
                         <div className="absolute inset-0 bg-linear-to-r from-transparent via-cyan-500/10 to-transparent -translate-x-full animate-shimmer" />
                         <Loader2 className="w-6 h-6 text-cyan-600 dark:text-cyan-400 animate-spin" />
                       </div>
@@ -308,7 +308,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
                     <>
                       <motion.div
                         whileHover={{ scale: 1.05 }}
-                        className="relative w-36 h-36 rounded-xl overflow-hidden border-2 border-cyan-500/40 bg-black flex-shrink-0 shadow-[0_0_20px_rgba(6,182,212,0.2)]"
+                        className="relative w-36 h-36 rounded-xl overflow-hidden border-2 border-cyan-500/40 bg-black shrink-0 shadow-[0_0_20px_rgba(6,182,212,0.2)]"
                       >
                         <img src={mriPreview} alt="MRI Scan Preview" className="w-full h-full object-cover" />
                         <span className="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/80 backdrop-blur-md text-[9px] font-mono text-cyan-300 border border-cyan-500/30">

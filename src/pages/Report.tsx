@@ -62,7 +62,7 @@ export const Report: React.FC<ReportProps> = ({ prediction, onNewPrediction, onB
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-linear-to-r from-purple-500/20 via-cyan-500/20 to-emerald-500/15 rounded-full blur-3xl pointer-events-none -z-10"
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-100 bg-linear-to-r from-purple-500/20 via-cyan-500/20 to-emerald-500/15 rounded-full blur-3xl pointer-events-none -z-10"
       />
 
       {/* Top Controls Bar (hidden during printing) */}
