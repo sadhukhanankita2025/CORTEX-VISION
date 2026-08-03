@@ -21,7 +21,7 @@ AI-powered Brain Tumor MRI Classification and Explainability System using React,
 ## Project Structure
 
 ```text
-neurovision-xai/
+cortex-vision/
 │
 ├── backend/
 │   ├── app.py
@@ -42,7 +42,7 @@ neurovision-xai/
 
 ```bash
 git clone <repository-url>
-cd neurovision-xai
+cd cortex-vision
 
 npm install
 npm run dev
