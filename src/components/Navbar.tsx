@@ -3,7 +3,7 @@ import { Brain, Bell, Menu, X, User as UserIcon, Code2, LogOut, CheckCircle, Che
 import { ThemeToggle } from './ThemeToggle';
 import { useAuth } from '../authContext';
 import { MOCK_NOTIFICATIONS } from '../data/mockData';
-import cortexLogo from '../assets/cortex-logo-clean.jpeg';
+import cortexLogo from '../assets/cortex-logo-clean.png';
 
 interface NavbarProps {
   activePage?: string;
@@ -12,10 +12,10 @@ interface NavbarProps {
   onNavigate?: (page: string) => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ 
-  activePage, 
-  currentPage, 
-  setActivePage, 
+export const Navbar: React.FC<NavbarProps> = ({
+  activePage,
+  currentPage,
+  setActivePage,
   onNavigate
 }) => {
   const current = currentPage || activePage || 'home';
@@ -77,14 +77,14 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header className="sticky top-0 z-40 w-full bg-white/90 dark:bg-slate-950/90 border-b border-slate-200 dark:border-slate-800/80 backdrop-blur-xl transition-all shadow-sm dark:shadow-none">
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
-        <div className="flex items-center justify-between min-h-[66px] sm:min-h-[72px] py-2 gap-2 sm:gap-4">
-          
+        <div className="flex items-center justify-between min-h-16 sm:min-h-18 py-2 gap-2 sm:gap-4">
+
           {/* Official Branding Logo & Name */}
-          <div 
+          <div
             onClick={() => handleNav('home')}
             className="flex items-center cursor-pointer group shrink-0 transition-transform hover:scale-[1.02]"
           >
-            <img 
+            <img
               src={cortexLogo}
               alt="Cortex Vision Logo"
               className="h-9 sm:h-11 md:h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-105 shrink-0"
@@ -110,11 +110,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   key={item.id}
                   onClick={() => handleNav(item.id)}
-                  className={`px-3 xl:px-4 py-1.5 rounded-full text-[11px] xl:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
-                    isActive
+                  className={`px-3 xl:px-4 py-1.5 rounded-full text-[11px] xl:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${isActive
                       ? 'bg-cyan-600 dark:bg-cyan-400 text-white dark:text-slate-950 font-extrabold shadow-md shadow-cyan-500/20'
                       : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-200/80 dark:hover:bg-slate-800/50'
-                  }`}
+                    }`}
                 >
                   {item.label}
                 </button>
@@ -124,7 +123,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Right Action Icons & Controls */}
           <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
-            
+
             {/* Theme Toggle */}
             <ThemeToggle />
 
@@ -175,14 +174,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                       </div>
                     ) : (
                       notifications.map((n) => (
-                        <div 
-                          key={n.id} 
+                        <div
+                          key={n.id}
                           onClick={() => handleNotifClick(n)}
-                          className={`p-2.5 rounded-xl border text-xs cursor-pointer transition-all hover:border-cyan-500/50 group relative ${
-                            n.read 
-                              ? 'bg-slate-50 dark:bg-slate-950/60 border-slate-200 dark:border-slate-800/80 text-slate-600 dark:text-slate-400' 
+                          className={`p-2.5 rounded-xl border text-xs cursor-pointer transition-all hover:border-cyan-500/50 group relative ${n.read
+                              ? 'bg-slate-50 dark:bg-slate-950/60 border-slate-200 dark:border-slate-800/80 text-slate-600 dark:text-slate-400'
                               : 'bg-sky-50 dark:bg-slate-800/80 border-cyan-300 dark:border-cyan-500/30 text-slate-900 dark:text-slate-200 shadow-sm'
-                          }`}
+                            }`}
                         >
                           <div className="flex items-start justify-between gap-2">
                             <div className="flex items-center space-x-1.5">
@@ -292,11 +290,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 handleNav(item.id);
                 setMobileMenuOpen(false);
               }}
-              className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                current === item.id
+              className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${current === item.id
                   ? 'bg-cyan-500 text-slate-950 font-bold'
                   : 'text-slate-300 hover:bg-slate-800'
-              }`}
+                }`}
             >
               {item.label}
             </button>

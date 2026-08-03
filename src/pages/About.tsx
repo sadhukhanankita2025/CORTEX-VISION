@@ -10,14 +10,14 @@ interface AboutProps {
 export const About: React.FC<AboutProps> = ({ onStartPrediction }) => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
-      
+
       {/* Title */}
       <div className="text-center max-w-3xl mx-auto space-y-4">
         <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-600/30 dark:border-cyan-500/30 text-cyan-700 dark:text-cyan-400 text-xs font-mono font-semibold">
           <Stethoscope className="w-4 h-4 text-cyan-600 dark:text-cyan-400 animate-pulse" />
           <span>About Cortex Vision</span>
         </div>
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -36,7 +36,7 @@ export const About: React.FC<AboutProps> = ({ onStartPrediction }) => {
 
       {/* 4 Core Pillars Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
+
         <div className="p-8 rounded-3xl bg-white dark:bg-slate-900/80 border border-blue-200 dark:border-slate-800 hover:border-cyan-500/50 glow-cyan-hover transition-all duration-300 transform hover:-translate-y-2 hover:scale-[1.02] space-y-4 group shadow-lg relative overflow-hidden">
           <div className="absolute -top-12 -right-12 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl group-hover:scale-150 transition-transform pointer-events-none" />
           <div className="p-3.5 rounded-2xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30 w-fit group-hover:scale-110 group-hover:bg-cyan-500 group-hover:text-slate-950 transition-all duration-300">
@@ -124,7 +124,7 @@ export const About: React.FC<AboutProps> = ({ onStartPrediction }) => {
       </div>
 
       {/* Interactive Clinical Pipeline Horizontal Workflow Card */}
-      <motion.div 
+      <motion.div
         whileHover={{ scale: 1.005 }}
         transition={{ duration: 0.3 }}
         className="pipeline-card-text max-w-6xl mx-auto p-6 sm:p-8 rounded-3xl bg-sky-50/90 dark:bg-slate-950 border-2 border-blue-300 dark:border-blue-500/40 glow-blue text-xs shadow-2xl space-y-8 relative overflow-hidden my-10"
@@ -135,9 +135,9 @@ export const About: React.FC<AboutProps> = ({ onStartPrediction }) => {
         <div className="text-center space-y-2 border-b border-blue-200 dark:border-slate-800/80 pb-5">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-blue-500/20 border border-blue-400/40 text-cyan-800 dark:text-cyan-300 font-mono font-bold text-xs shadow-sm">
             <Sparkles className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-300 animate-spin-slow" />
-            <span>Interactive Clinical Pipeline</span>
+            <span>Clinical Workflow</span>
           </div>
-          <motion.h3 
+          <motion.h3
             initial={{ scale: 0.95, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
@@ -154,12 +154,12 @@ export const About: React.FC<AboutProps> = ({ onStartPrediction }) => {
         {/* 4-Step Horizontal Pipeline Grid with Connected Line */}
         <div className="relative">
           {/* Desktop Connecting Wire */}
-          <div className="hidden lg:block absolute top-12 left-16 right-16 h-1 bg-gradient-to-r from-cyan-400 via-indigo-500 via-purple-500 to-emerald-400 opacity-50 z-0 rounded-full blur-[0.5px]" />
+          <div className="hidden lg:block absolute top-12 left-16 right-16 h-1 bg-linear-to-r from-cyan-400 via-purple-500 to-emerald-400 opacity-50 z-0 rounded-full blur-[0.5px]" />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 relative z-10">
-            
+
             {/* Step 01 */}
-            <motion.div 
+            <motion.div
               animate={{ y: [-4, 4, -4] }}
               transition={{
                 repeat: Infinity,
@@ -195,7 +195,7 @@ export const About: React.FC<AboutProps> = ({ onStartPrediction }) => {
             </motion.div>
 
             {/* Step 02 */}
-            <motion.div 
+            <motion.div
               animate={{ y: [-4, 4, -4] }}
               transition={{
                 repeat: Infinity,
@@ -231,7 +231,7 @@ export const About: React.FC<AboutProps> = ({ onStartPrediction }) => {
             </motion.div>
 
             {/* Step 03 */}
-            <motion.div 
+            <motion.div
               animate={{ y: [-4, 4, -4] }}
               transition={{
                 repeat: Infinity,
@@ -267,7 +267,7 @@ export const About: React.FC<AboutProps> = ({ onStartPrediction }) => {
             </motion.div>
 
             {/* Step 04 */}
-            <motion.div 
+            <motion.div
               animate={{ y: [-4, 4, -4] }}
               transition={{
                 repeat: Infinity,
@@ -309,17 +309,16 @@ export const About: React.FC<AboutProps> = ({ onStartPrediction }) => {
         <div className="pt-2 text-center max-w-sm mx-auto">
           <button
             onClick={onStartPrediction}
-            className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 hover:from-cyan-300 hover:to-indigo-400 text-white font-extrabold text-xs transition-all cursor-pointer flex items-center justify-center space-x-2.5 shadow-xl shadow-blue-500/25 hover:scale-105 active:scale-95 border border-blue-300/30"
+            className="w-full py-3.5 px-6 rounded-2xl bg-linear-to-r from-cyan-400 via-blue-500 to-indigo-500 hover:from-cyan-300 hover:to-indigo-400 text-white font-extrabold text-xs transition-all cursor-pointer flex items-center justify-center space-x-2.5 shadow-xl shadow-blue-500/25 hover:scale-105 active:scale-95 border border-blue-300/30"
           >
-            <span className="!text-white">Launch Interactive Pipeline</span>
+            <span className="text-white">Launch Interactive Pipeline</span>
             <ArrowRightCircle className="w-4 h-4 text-white" />
           </button>
         </div>
 
       </motion.div>
 
-      {/* CTA SECTION */}
-      <CtaSection onStartPrediction={onStartPrediction} />
+
 
     </div>
   );

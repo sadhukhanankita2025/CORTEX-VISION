@@ -21,14 +21,14 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
       className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10 relative"
     >
       {/* Background ambient glow blob */}
-      <motion.div 
+      <motion.div
         animate={{
           scale: [1, 1.15, 1],
           opacity: [0.15, 0.25, 0.15],
@@ -40,9 +40,9 @@ export const Contact: React.FC = () => {
         }}
         className="absolute top-10 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-cyan-500/20 rounded-full blur-3xl pointer-events-none -z-10"
       />
-      
+
       <div className="text-center max-w-2xl mx-auto space-y-2">
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
@@ -50,7 +50,7 @@ export const Contact: React.FC = () => {
         >
           Contact &amp; Clinical Integration Support
         </motion.h1>
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.1 }}
@@ -61,15 +61,15 @@ export const Contact: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
+
         {/* Contact Info (5 cols) */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="lg:col-span-5 space-y-6"
         >
-          <motion.div 
+          <motion.div
             whileHover={{ y: -4 }}
             transition={{ duration: 0.3 }}
             className="p-8 rounded-3xl bg-white dark:bg-slate-900/90 backdrop-blur-xl border border-blue-200 dark:border-slate-800 shadow-2xl space-y-6 hover:border-cyan-500/40 transition-colors"
@@ -78,7 +78,7 @@ export const Contact: React.FC = () => {
               <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-pulse" />
               <span>Cortex Vision AI Medical Center</span>
             </h3>
-            
+
             <div className="space-y-4 text-xs">
               <div className="flex items-start space-x-3 group">
                 <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all duration-300">
@@ -112,7 +112,7 @@ export const Contact: React.FC = () => {
             </div>
 
             {/* Map visual placeholder */}
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.02 }}
               className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/80 border border-blue-100 dark:border-slate-800 text-center text-xs text-slate-500 space-y-2 shadow-inner"
             >
@@ -123,13 +123,13 @@ export const Contact: React.FC = () => {
         </motion.div>
 
         {/* Contact Form (7 cols) */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           className="lg:col-span-7"
         >
-          <motion.div 
+          <motion.div
             whileHover={{ y: -4 }}
             transition={{ duration: 0.3 }}
             className="p-8 rounded-3xl bg-white dark:bg-slate-900/90 backdrop-blur-xl border border-blue-200 dark:border-slate-800 shadow-2xl space-y-6 hover:border-purple-500/40 transition-colors"
@@ -140,7 +140,7 @@ export const Contact: React.FC = () => {
             </h3>
 
             {submitted ? (
-              <motion.div 
+              <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 className="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/40 text-center space-y-2 text-emerald-800 dark:text-emerald-300 shadow-lg"
@@ -208,7 +208,7 @@ export const Contact: React.FC = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full flex items-center justify-center space-x-2 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 via-indigo-600 to-purple-600 text-white font-bold text-xs shadow-lg shadow-cyan-500/25 transition-all cursor-pointer"
+                  className="w-full flex items-center justify-center space-x-2 py-3.5 rounded-2xl bg-linear-to-r from-cyan-500 via-purple-600 to-purple-600 text-white font-bold text-xs shadow-lg shadow-cyan-500/25 transition-all cursor-pointer"
                 >
                   <Send className="w-4 h-4 text-white" />
                   <span>Send Inquiry</span>

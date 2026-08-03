@@ -2,8 +2,8 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Brain3DVisualizer } from '../components/Brain3DVisualizer';
 import { CtaSection } from '../components/CtaSection';
-import { 
-  Upload, Sparkles, ArrowRight, Activity, ShieldCheck, Zap, 
+import {
+  Upload, Sparkles, ArrowRight, Activity, ShieldCheck, Zap,
   FileCheck2, Cpu, Users, Layers, UserCheck, FileDown, ArrowDown,
   CheckCircle2, ArrowRightCircle, Stethoscope, Microscope
 } from 'lucide-react';
@@ -14,9 +14,9 @@ interface HomeProps {
   onNavigate?: (page: string) => void;
 }
 
-export const Home: React.FC<HomeProps> = ({ 
-  onStartPrediction, 
-  onViewReport, 
+export const Home: React.FC<HomeProps> = ({
+  onStartPrediction,
+  onViewReport,
   onNavigate
 }) => {
   const handleNav = (page: string) => {
@@ -41,8 +41,8 @@ export const Home: React.FC<HomeProps> = ({
 
   const itemVariants = {
     hidden: { opacity: 0, y: 25 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: { duration: 0.5, ease: "easeOut" }
     }
@@ -50,42 +50,42 @@ export const Home: React.FC<HomeProps> = ({
 
   return (
     <div className="space-y-20 pb-16 overflow-hidden">
-      
+
       {/* HERO SECTION */}
       <section className="relative pt-8 pb-12 overflow-hidden">
         {/* Animated Background Particles & Cyber Glows */}
-        <motion.div 
-          animate={{ 
+        <motion.div
+          animate={{
             y: [0, -25, 0],
             scale: [1, 1.15, 1],
             opacity: [0.15, 0.35, 0.15]
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-cyan-500/20 dark:bg-cyan-500/25 rounded-full blur-[130px] pointer-events-none" 
+          className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-cyan-500/20 dark:bg-cyan-500/25 rounded-full blur-[130px] pointer-events-none"
         />
-        <motion.div 
-          animate={{ 
+        <motion.div
+          animate={{
             y: [0, 30, 0],
             scale: [1, 1.2, 1],
             opacity: [0.1, 0.3, 0.1]
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute top-1/3 right-10 w-[450px] h-[450px] bg-indigo-500/20 dark:bg-indigo-500/25 rounded-full blur-[110px] pointer-events-none" 
+          className="absolute top-1/3 right-10 w-[450px] h-[450px] bg-indigo-500/20 dark:bg-indigo-500/25 rounded-full blur-[110px] pointer-events-none"
         />
 
         {/* Dark Mode Floating Cyber Particles */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden hidden dark:block">
-          <motion.div 
+          <motion.div
             animate={{ y: [0, -100, 0], opacity: [0.2, 0.8, 0.2] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
             className="absolute top-1/3 left-1/6 w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"
           />
-          <motion.div 
+          <motion.div
             animate={{ y: [0, -80, 0], opacity: [0.3, 0.9, 0.3] }}
             transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 2 }}
             className="absolute top-1/2 right-1/4 w-2.5 h-2.5 rounded-full bg-indigo-400 shadow-[0_0_12px_#818cf8]"
           />
-          <motion.div 
+          <motion.div
             animate={{ y: [0, -120, 0], opacity: [0.1, 0.7, 0.1] }}
             transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 4 }}
             className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 rounded-full bg-purple-400 shadow-[0_0_8px_#c084fc]"
@@ -111,17 +111,17 @@ export const Home: React.FC<HomeProps> = ({
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
+
             {/* Left Hero Content */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="lg:col-span-7 space-y-6 text-center lg:text-left"
             >
-              
+
               {/* Badge */}
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.05 }}
                 className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 dark:bg-cyan-500/10 border border-cyan-600/30 dark:border-cyan-500/30 text-cyan-700 dark:text-cyan-400 text-xs font-mono font-medium shadow-sm transition-all cursor-pointer"
               >
@@ -133,7 +133,7 @@ export const Home: React.FC<HomeProps> = ({
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
                 <span className="text-sky-500 dark:text-white">AI-Powered</span>{" "}
                 <br className="hidden sm:inline" />
-                <span className="bg-gradient-to-r from-cyan-600 via-blue-700 to-indigo-800 dark:from-cyan-400 dark:via-indigo-300 dark:to-purple-400 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-cyan-600 via-blue-700 to-indigo-800 dark:from-cyan-400 dark:via-indigo-300 dark:to-purple-400 bg-clip-text text-transparent">
                   Brain Tumor Detection
                 </span>
               </h1>
@@ -176,7 +176,7 @@ export const Home: React.FC<HomeProps> = ({
               </div>
 
               {/* Tech Badges Row */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
@@ -199,7 +199,7 @@ export const Home: React.FC<HomeProps> = ({
             </motion.div>
 
             {/* Right Side Animated Visual Effect */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.92, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
@@ -214,16 +214,16 @@ export const Home: React.FC<HomeProps> = ({
 
       {/* SYSTEM WORKFLOW ARCHITECTURE SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6 }}
           className="p-8 sm:p-10 rounded-3xl bg-blue-50/90 dark:bg-slate-900/80 border border-blue-200 dark:border-slate-800 shadow-xl space-y-10 relative overflow-hidden"
         >
-          
+
           <div className="text-center max-w-3xl mx-auto space-y-2">
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.05 }}
               className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-500/10 dark:bg-cyan-500/10 border border-cyan-600/30 dark:border-cyan-500/30 text-cyan-700 dark:text-cyan-400 text-xs font-mono font-semibold cursor-pointer"
             >
@@ -239,16 +239,16 @@ export const Home: React.FC<HomeProps> = ({
           </div>
 
           {/* HORIZONTAL WORKFLOW STEPS (DESKTOP) */}
-          <motion.div 
+          <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
             className="hidden lg:grid grid-cols-4 gap-6 relative"
           >
-            
+
             {/* Step 1: Upload MRI */}
-            <motion.div 
+            <motion.div
               variants={itemVariants}
               whileHover={{ scale: 1.05, y: -6 }}
               className="p-6 rounded-3xl bg-white dark:bg-slate-950 border border-cyan-300 dark:border-cyan-500/40 glow-cyan glow-cyan-hover transition-all duration-300 space-y-3 group text-center relative z-10 overflow-hidden shadow-md dark:shadow-none"
@@ -267,7 +267,7 @@ export const Home: React.FC<HomeProps> = ({
             </motion.div>
 
             {/* Step 2: Fill Patient Details */}
-            <motion.div 
+            <motion.div
               variants={itemVariants}
               whileHover={{ scale: 1.05, y: -6 }}
               className="p-6 rounded-3xl bg-white dark:bg-slate-950 border border-indigo-300 dark:border-indigo-500/40 glow-indigo glow-indigo-hover transition-all duration-300 space-y-3 group text-center relative z-10 overflow-hidden shadow-md dark:shadow-none"
@@ -286,7 +286,7 @@ export const Home: React.FC<HomeProps> = ({
             </motion.div>
 
             {/* Step 3: shows Prediction */}
-            <motion.div 
+            <motion.div
               variants={itemVariants}
               whileHover={{ scale: 1.05, y: -6 }}
               className="p-6 rounded-3xl bg-white dark:bg-slate-950 border border-purple-300 dark:border-purple-500/40 glow-purple glow-purple-hover transition-all duration-300 space-y-3 group text-center relative z-10 overflow-hidden shadow-md dark:shadow-none"
@@ -305,7 +305,7 @@ export const Home: React.FC<HomeProps> = ({
             </motion.div>
 
             {/* Step 4: User downloads Report */}
-            <motion.div 
+            <motion.div
               variants={itemVariants}
               whileHover={{ scale: 1.05, y: -6 }}
               className="p-6 rounded-3xl bg-white dark:bg-slate-950 border border-emerald-300 dark:border-emerald-500/40 glow-emerald glow-emerald-hover transition-all duration-300 space-y-3 group text-center relative z-10 overflow-hidden shadow-md dark:shadow-none"
@@ -326,7 +326,7 @@ export const Home: React.FC<HomeProps> = ({
           </motion.div>
 
           {/* VERTICAL DIAGRAM FLOW CARD */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.97 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -340,9 +340,9 @@ export const Home: React.FC<HomeProps> = ({
             </div>
 
             <div className="flex flex-col items-center space-y-2 relative z-10">
-              
+
               {/* Node 1 */}
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.04, x: 3 }}
                 className="w-full max-w-sm py-3 px-4 rounded-xl bg-white dark:bg-slate-900 border border-cyan-300 dark:border-cyan-500/50 text-slate-900 dark:text-white font-bold flex items-center justify-between shadow-md transition-all cursor-pointer group"
               >
@@ -360,7 +360,7 @@ export const Home: React.FC<HomeProps> = ({
               </div>
 
               {/* Node 2 */}
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.04, x: 3 }}
                 className="w-full max-w-sm py-3 px-4 rounded-xl bg-white dark:bg-slate-900 border border-indigo-300 dark:border-indigo-500/50 text-slate-900 dark:text-white font-bold flex items-center justify-between shadow-md transition-all cursor-pointer group"
               >
@@ -378,7 +378,7 @@ export const Home: React.FC<HomeProps> = ({
               </div>
 
               {/* Node 3 */}
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.04, x: 3 }}
                 className="w-full max-w-sm py-3 px-4 rounded-xl bg-white dark:bg-slate-900 border border-purple-300 dark:border-purple-500/50 text-slate-900 dark:text-white font-bold flex items-center justify-between shadow-md transition-all cursor-pointer group"
               >
@@ -396,7 +396,7 @@ export const Home: React.FC<HomeProps> = ({
               </div>
 
               {/* Node 4 */}
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.04, x: 3 }}
                 className="w-full max-w-sm py-3 px-4 rounded-xl bg-white dark:bg-slate-900 border border-emerald-300 dark:border-emerald-500/50 text-slate-900 dark:text-white font-bold flex items-center justify-between shadow-md transition-all cursor-pointer group"
               >
@@ -428,18 +428,18 @@ export const Home: React.FC<HomeProps> = ({
 
       {/* STATISTICS SECTION - REDESIGNED MODERN CLINICAL IMPACT GRID */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6 }}
           className="p-8 sm:p-12 rounded-3xl bg-blue-50/90 dark:bg-slate-950/90 border border-blue-200 dark:border-slate-800 shadow-[0_20px_60px_rgba(6,182,212,0.12)] backdrop-blur-2xl relative overflow-hidden space-y-8"
         >
-          
+
           {/* Subtle Ambient Background Glowing Lights */}
           <div className="absolute -top-24 left-1/3 w-96 h-96 bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
           <div className="absolute -bottom-24 right-1/3 w-96 h-96 bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 via-indigo-500 to-purple-500" />
+          <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-cyan-400 via-purple-500 to-purple-500" />
 
           {/* Section Header */}
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b border-blue-200/80 dark:border-slate-800/80 relative z-10">
@@ -457,14 +457,14 @@ export const Home: React.FC<HomeProps> = ({
             </p>
           </div>
 
-          <motion.div 
+          <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10"
           >
-            
+
             {/* 1. Patients Analysed */}
             <motion.div
               variants={itemVariants}
@@ -472,7 +472,7 @@ export const Home: React.FC<HomeProps> = ({
               className="p-6 rounded-2xl bg-white dark:bg-slate-950/90 border border-sky-300 dark:border-cyan-500/30 hover:border-cyan-500 dark:hover:border-cyan-400 shadow-xl hover:shadow-[0_15px_35px_rgba(6,182,212,0.25)] transition-all duration-300 group relative overflow-hidden space-y-4"
             >
               <div className="absolute top-0 right-0 w-28 h-28 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none group-hover:scale-150 transition-transform" />
-              
+
               <div className="flex items-center justify-between">
                 <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30 group-hover:bg-cyan-500 group-hover:text-slate-950 transition-all duration-300 shadow-lg shadow-cyan-500/10">
                   <Users className="w-6 h-6" />
@@ -498,12 +498,12 @@ export const Home: React.FC<HomeProps> = ({
                   <span className="text-cyan-400 font-bold">88%</span>
                 </div>
                 <div className="w-full h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
-                  <motion.div 
+                  <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: "88%" }}
                     viewport={{ once: true }}
                     transition={{ duration: 1, delay: 0.3 }}
-                    className="h-full bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full group-hover:brightness-125 transition-all" 
+                    className="h-full bg-linear-to-r from-cyan-500 to-indigo-500 rounded-full group-hover:brightness-125 transition-all"
                   />
                 </div>
               </div>
@@ -521,7 +521,7 @@ export const Home: React.FC<HomeProps> = ({
               className="p-6 rounded-2xl bg-white dark:bg-slate-950/90 border border-indigo-200 dark:border-indigo-500/30 hover:border-indigo-400 shadow-xl hover:shadow-[0_15px_35px_rgba(99,102,241,0.25)] transition-all duration-300 group relative overflow-hidden space-y-4"
             >
               <div className="absolute top-0 right-0 w-28 h-28 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none group-hover:scale-150 transition-transform" />
-              
+
               <div className="flex items-center justify-between">
                 <div className="p-3 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/30 group-hover:bg-indigo-500 group-hover:text-slate-950 transition-all duration-300 shadow-lg shadow-indigo-500/10">
                   <Activity className="w-6 h-6" />
@@ -547,12 +547,12 @@ export const Home: React.FC<HomeProps> = ({
                   <span className="text-indigo-600 dark:text-indigo-400 font-bold">95.4%</span>
                 </div>
                 <div className="w-full h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
-                  <motion.div 
+                  <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: "95%" }}
                     viewport={{ once: true }}
                     transition={{ duration: 1, delay: 0.4 }}
-                    className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full group-hover:brightness-125 transition-all" 
+                    className="h-full bg-linear-to-r from-indigo-500 to-purple-500 rounded-full group-hover:brightness-125 transition-all"
                   />
                 </div>
               </div>
@@ -570,7 +570,7 @@ export const Home: React.FC<HomeProps> = ({
               className="p-6 rounded-2xl bg-white dark:bg-slate-950/90 border border-purple-200 dark:border-purple-500/30 hover:border-purple-400 shadow-xl hover:shadow-[0_15px_35px_rgba(168,85,247,0.25)] transition-all duration-300 group relative overflow-hidden space-y-4"
             >
               <div className="absolute top-0 right-0 w-28 h-28 bg-purple-500/10 rounded-full blur-2xl pointer-events-none group-hover:scale-150 transition-transform" />
-              
+
               <div className="flex items-center justify-between">
                 <div className="p-3 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/30 group-hover:bg-purple-500 group-hover:text-slate-950 transition-all duration-300 shadow-lg shadow-purple-500/10">
                   <FileCheck2 className="w-6 h-6" />
@@ -596,12 +596,12 @@ export const Home: React.FC<HomeProps> = ({
                   <span className="text-purple-600 dark:text-purple-400 font-bold">100%</span>
                 </div>
                 <div className="w-full h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
-                  <motion.div 
+                  <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: "100%" }}
                     viewport={{ once: true }}
                     transition={{ duration: 1, delay: 0.5 }}
-                    className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full group-hover:brightness-125 transition-all" 
+                    className="h-full bg-linear-to-r from-purple-500 to-pink-500 rounded-full group-hover:brightness-125 transition-all"
                   />
                 </div>
               </div>
@@ -619,7 +619,7 @@ export const Home: React.FC<HomeProps> = ({
               className="p-6 rounded-2xl bg-white dark:bg-slate-950/90 border border-emerald-200 dark:border-emerald-500/30 hover:border-emerald-400 shadow-xl hover:shadow-[0_15px_35px_rgba(16,185,129,0.25)] transition-all duration-300 group relative overflow-hidden space-y-4"
             >
               <div className="absolute top-0 right-0 w-28 h-28 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none group-hover:scale-150 transition-transform" />
-              
+
               <div className="flex items-center justify-between">
                 <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 group-hover:bg-emerald-500 group-hover:text-slate-950 transition-all duration-300 shadow-lg shadow-emerald-500/10">
                   <ShieldCheck className="w-6 h-6" />
@@ -645,12 +645,12 @@ export const Home: React.FC<HomeProps> = ({
                   <span className="text-emerald-600 dark:text-emerald-400 font-bold">94.8%</span>
                 </div>
                 <div className="w-full h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
-                  <motion.div 
+                  <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: "94.8%" }}
                     viewport={{ once: true }}
                     transition={{ duration: 1, delay: 0.6 }}
-                    className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full group-hover:brightness-125 transition-all" 
+                    className="h-full bg-linear-to-r from-emerald-500 to-teal-400 rounded-full group-hover:brightness-125 transition-all"
                   />
                 </div>
               </div>
@@ -667,7 +667,7 @@ export const Home: React.FC<HomeProps> = ({
 
       {/* ABOUT SUMMARY SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -686,15 +686,15 @@ export const Home: React.FC<HomeProps> = ({
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
-          
-          <motion.div 
+
+          <motion.div
             variants={itemVariants}
             whileHover={{ scale: 1.04, y: -6 }}
             className="p-6 rounded-3xl bg-white dark:bg-slate-900/80 border border-blue-200 dark:border-slate-800 hover:border-cyan-500/50 glow-cyan-hover transition-all duration-300 group shadow-lg relative overflow-hidden"
@@ -709,7 +709,7 @@ export const Home: React.FC<HomeProps> = ({
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             whileHover={{ scale: 1.04, y: -6 }}
             className="p-6 rounded-3xl bg-white dark:bg-slate-900/80 border border-blue-200 dark:border-slate-800 hover:border-indigo-500/50 glow-indigo-hover transition-all duration-300 group shadow-lg relative overflow-hidden"
@@ -724,7 +724,7 @@ export const Home: React.FC<HomeProps> = ({
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             whileHover={{ scale: 1.04, y: -6 }}
             className="p-6 rounded-3xl bg-white dark:bg-slate-900/80 border border-blue-200 dark:border-slate-800 hover:border-amber-500/50 glow-amber-hover transition-all duration-300 group shadow-lg relative overflow-hidden"
@@ -739,7 +739,7 @@ export const Home: React.FC<HomeProps> = ({
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             whileHover={{ scale: 1.04, y: -6 }}
             className="p-6 rounded-3xl bg-white dark:bg-slate-900/80 border border-blue-200 dark:border-slate-800 hover:border-emerald-500/50 glow-emerald-hover transition-all duration-300 group shadow-lg relative overflow-hidden"

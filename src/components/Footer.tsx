@@ -1,6 +1,6 @@
 import React from 'react';
 import { Brain, Github, Shield, Activity } from 'lucide-react';
-import cortexLogo from '../assets/cortex-logo-icon.png';
+import cortexLogo from '../assets/cortex-logo-clean.png';
 
 interface FooterProps {
   setActivePage?: (page: string) => void;
@@ -19,11 +19,11 @@ export const Footer: React.FC<FooterProps> = ({ setActivePage, onNavigate }) => 
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-32 bg-cyan-500/5 dark:bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 relative z-10">
-        
+
         {/* Col 1: Brand & Description */}
         <div className="space-y-4">
           <div className="flex items-center cursor-pointer group shrink-0" onClick={() => handleNav('home')}>
-            <img 
+            <img
               src={cortexLogo}
               alt="Cortex Vision Logo"
               className="h-10 sm:h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-105 shrink-0"
