@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { 
-  Upload, FileUp, Sparkles, RefreshCw, CheckCircle2, AlertTriangle, 
+import {
+  Upload, FileUp, Sparkles, RefreshCw, CheckCircle2, AlertTriangle,
   Clock, Cpu, Eye, FileText, ArrowRight, User, Stethoscope, Building, Calendar, Info,
   Loader2, Activity, Scan, Zap, ShieldCheck, Layers, Binary
 } from 'lucide-react';
@@ -117,7 +117,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
         mriFile || mriPreview,
         selectedSampleType
       );
-      
+
       setPredictionResult(result);
       await historyService.addPrediction(result);
     } catch (err) {
@@ -137,14 +137,14 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
       className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10 relative overflow-hidden"
     >
       {/* Moving & Glowing Background Ambient Blobs */}
-      <motion.div 
+      <motion.div
         animate={{
           x: [0, 40, -30, 0],
           y: [0, -30, 20, 0],
@@ -156,10 +156,10 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute -top-10 -left-10 w-[500px] h-[500px] bg-gradient-to-r from-cyan-500/25 via-blue-500/20 to-indigo-500/20 rounded-full blur-3xl pointer-events-none -z-10"
+        className="absolute -top-10 -left-10 w-[500px] h-[500px] bg-linear-to-r from-cyan-500/25 via-blue-500/20 to-indigo-500/20 rounded-full blur-3xl pointer-events-none -z-10"
       />
-      
-      <motion.div 
+
+      <motion.div
         animate={{
           x: [0, -50, 40, 0],
           y: [0, 40, -30, 0],
@@ -171,17 +171,17 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute top-1/2 -right-20 w-[600px] h-[600px] bg-gradient-to-l from-purple-500/20 via-pink-500/15 to-cyan-500/20 rounded-full blur-3xl pointer-events-none -z-10"
+        className="absolute top-1/2 -right-20 w-[600px] h-[600px] bg-linear-to-l from-purple-500/20 via-pink-500/15 to-cyan-500/20 rounded-full blur-3xl pointer-events-none -z-10"
       />
 
       {/* Page Header */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
         className="text-center max-w-3xl mx-auto space-y-2"
       >
-        <motion.div 
+        <motion.div
           whileHover={{ scale: 1.05 }}
           className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-600/30 dark:border-cyan-500/30 text-cyan-700 dark:text-cyan-400 text-xs font-mono font-semibold shadow-lg shadow-cyan-500/10 backdrop-blur-md"
         >
@@ -201,12 +201,12 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
       </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
+
         {/* Left Column (7 cols): Upload Card & Patient Info Form */}
         <div className="lg:col-span-7 space-y-8">
-          
+
           {/* UPLOAD CARD WITH POP-UP MOTION */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             whileHover={{ y: -3 }}
@@ -236,11 +236,10 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
                     whileHover={{ scale: 1.04 }}
                     whileTap={{ scale: 0.96 }}
                     onClick={() => selectSample(s.type, s.url)}
-                    className={`px-2.5 py-1.5 rounded-xl text-xs font-medium font-mono border transition-all cursor-pointer ${
-                      selectedSampleType === s.type
-                        ? 'bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 border-cyan-500/60 font-bold shadow-md shadow-cyan-500/20'
-                        : 'bg-slate-100 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800'
-                    }`}
+                    className={`px-2.5 py-1.5 rounded-xl text-xs font-medium font-mono border transition-all cursor-pointer ${selectedSampleType === s.type
+                      ? 'bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 border-cyan-500/60 font-bold shadow-md shadow-cyan-500/20'
+                      : 'bg-slate-100 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800'
+                      }`}
                   >
                     {s.label}
                   </motion.button>
@@ -254,11 +253,10 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
-              className={`relative border-2 border-dashed rounded-2xl p-6 text-center transition-all ${
-                isDragging
-                  ? 'border-cyan-400 bg-cyan-500/15 shadow-[0_0_30px_rgba(6,182,212,0.25)]'
-                  : 'border-slate-300 dark:border-slate-700/80 bg-slate-50/80 dark:bg-slate-950/60 hover:border-cyan-500/40'
-              }`}
+              className={`relative border-2 border-dashed rounded-2xl p-6 text-center transition-all ${isDragging
+                ? 'border-cyan-400 bg-cyan-500/15 shadow-[0_0_30px_rgba(6,182,212,0.25)]'
+                : 'border-slate-300 dark:border-slate-700/80 bg-slate-50/80 dark:bg-slate-950/60 hover:border-cyan-500/40'
+                }`}
             >
               <input
                 type="file"
@@ -266,9 +264,9 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
                 onChange={handleFileChange}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
               />
-              
+
               <div className="flex flex-col items-center justify-center space-y-2">
-                <motion.div 
+                <motion.div
                   animate={{ y: [0, -4, 0] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                   className="p-3.5 rounded-2xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30 shadow-md shadow-cyan-500/10"
@@ -285,7 +283,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
             {/* Preview Box with Pop Motion and Skeleton Spinner */}
             <AnimatePresence mode="wait">
               {mriPreview && (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, scale: 0.95, y: 10 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95, y: -10 }}
@@ -296,7 +294,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
                     /* Subtle Skeleton Loader for Image Preview */
                     <div className="flex flex-col sm:flex-row items-center gap-4 w-full">
                       <div className="relative w-36 h-36 rounded-xl overflow-hidden border-2 border-cyan-500/30 bg-slate-100 dark:bg-slate-900 flex-shrink-0 flex items-center justify-center">
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent -translate-x-full animate-shimmer" />
+                        <div className="absolute inset-0 bg-linear-to-r from-transparent via-cyan-500/10 to-transparent -translate-x-full animate-shimmer" />
                         <Loader2 className="w-6 h-6 text-cyan-600 dark:text-cyan-400 animate-spin" />
                       </div>
                       <div className="space-y-2.5 text-xs w-full">
@@ -308,7 +306,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
                     </div>
                   ) : (
                     <>
-                      <motion.div 
+                      <motion.div
                         whileHover={{ scale: 1.05 }}
                         className="relative w-36 h-36 rounded-xl overflow-hidden border-2 border-cyan-500/40 bg-black flex-shrink-0 shadow-[0_0_20px_rgba(6,182,212,0.2)]"
                       >
@@ -345,7 +343,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
                 whileTap={{ scale: 0.98 }}
                 onClick={handleAnalyze}
                 disabled={loading || !mriPreview}
-                className="flex-1 flex items-center justify-center space-x-2 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 via-teal-400 to-cyan-500 hover:from-cyan-400 hover:to-teal-300 text-slate-950 font-extrabold text-sm shadow-lg shadow-cyan-500/25 transition-all cursor-pointer disabled:opacity-50"
+                className="flex-1 flex items-center justify-center space-x-2 py-3.5 rounded-2xl bg-linear-to-r from-cyan-500 via-teal-400 to-cyan-500 hover:from-cyan-400 hover:to-teal-300 text-slate-950 font-extrabold text-sm shadow-lg shadow-cyan-500/25 transition-all cursor-pointer disabled:opacity-50"
               >
                 {loading ? (
                   <>
@@ -373,7 +371,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
           </motion.div>
 
           {/* PATIENT INFORMATION FORM WITH POP MOTION */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             whileHover={{ y: -3 }}
@@ -469,8 +467,8 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
 
         {/* Right Column (5 cols): PREDICTION RESULT CARD WITH POP-UP ANIMATIONS */}
         <div className="lg:col-span-5 space-y-6">
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             whileHover={{ y: -3 }}
@@ -491,7 +489,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
             <AnimatePresence mode="wait">
               {loading ? (
                 /* SUBTLE INFERENCE SKELETON LOADER & SPINNER ANIMATION */
-                <motion.div 
+                <motion.div
                   key="inference-loading-skeleton"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -530,8 +528,8 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
 
                   {/* Classification Result Skeleton Box */}
                   <div className="p-5 rounded-2xl bg-slate-50/80 dark:bg-slate-950/80 border border-blue-100 dark:border-slate-800 space-y-3 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent -translate-x-full animate-shimmer" />
-                    
+                    <div className="absolute inset-0 bg-linear-to-r from-transparent via-cyan-500/10 to-transparent -translate-x-full animate-shimmer" />
+
                     <div className="flex justify-center">
                       <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700/60 flex items-center justify-center">
                         <Loader2 className="w-5 h-5 text-cyan-600 dark:text-cyan-400 animate-spin" />
@@ -555,13 +553,13 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
                     </div>
 
                     <div className="relative h-28 rounded-xl bg-slate-100 dark:bg-slate-900 overflow-hidden border border-slate-200 dark:border-slate-800 flex items-center justify-center">
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/15 to-transparent -translate-x-full animate-shimmer" />
-                      
+                      <div className="absolute inset-0 bg-linear-to-r from-transparent via-cyan-500/15 to-transparent -translate-x-full animate-shimmer" />
+
                       {/* Animated Laser Scan Line passing vertically */}
                       <motion.div
                         animate={{ top: ['0%', '100%', '0%'] }}
                         transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-                        className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_15px_#38bdf8] z-10 pointer-events-none"
+                        className="absolute left-0 right-0 h-1 bg-linear-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_15px_#38bdf8] z-10 pointer-events-none"
                       />
 
                       <div className="relative z-10 flex items-center space-x-2 text-xs font-mono text-cyan-700 dark:text-cyan-300 font-semibold bg-white/90 dark:bg-slate-950/80 px-3 py-1.5 rounded-lg border border-cyan-500/30 backdrop-blur-md">
@@ -578,10 +576,10 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
                       <div className="h-4 w-12 bg-slate-200 dark:bg-slate-800 rounded animate-pulse" />
                     </div>
                     <div className="w-full bg-slate-200 dark:bg-slate-800/80 h-3 rounded-full overflow-hidden p-0.5 border border-slate-300 dark:border-slate-700/50 relative">
-                      <motion.div 
+                      <motion.div
                         animate={{ width: ['15%', '60%', '95%'] }}
                         transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-                        className="bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-500 h-full rounded-full shadow-md shadow-cyan-500/30"
+                        className="bg-linear-to-r from-cyan-500 via-purple-500 to-purple-500 h-full rounded-full shadow-md shadow-cyan-500/30"
                       />
                     </div>
                   </div>
@@ -599,7 +597,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
                   </div>
                 </motion.div>
               ) : predictionResult ? (
-                <motion.div 
+                <motion.div
                   key="result-output"
                   initial={{ opacity: 0, scale: 0.85, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -607,20 +605,19 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
                   transition={{ type: "spring", stiffness: 300, damping: 25 }}
                   className="space-y-6"
                 >
-                  
+
                   {/* Result Classification Badge Box with Glowing Pop-Up Animation */}
-                  <motion.div 
+                  <motion.div
                     animate={{
                       boxShadow: predictionResult.tumorDetected
                         ? ['0 0 20px rgba(244,63,94,0.2)', '0 0 35px rgba(244,63,94,0.4)', '0 0 20px rgba(244,63,94,0.2)']
                         : ['0 0 20px rgba(16,185,129,0.2)', '0 0 35px rgba(16,185,129,0.4)', '0 0 20px rgba(16,185,129,0.2)']
                     }}
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    className={`p-5 rounded-2xl border text-center space-y-2 relative overflow-hidden ${
-                      predictionResult.tumorDetected
-                        ? 'bg-rose-500/10 border-rose-500/50 text-rose-700 dark:text-rose-300'
-                        : 'bg-emerald-500/10 border-emerald-500/50 text-emerald-700 dark:text-emerald-300'
-                    }`}
+                    className={`p-5 rounded-2xl border text-center space-y-2 relative overflow-hidden ${predictionResult.tumorDetected
+                      ? 'bg-rose-500/10 border-rose-500/50 text-rose-700 dark:text-rose-300'
+                      : 'bg-emerald-500/10 border-emerald-500/50 text-emerald-700 dark:text-emerald-300'
+                      }`}
                   >
                     <div className="flex justify-center">
                       {predictionResult.tumorDetected ? (
@@ -659,11 +656,11 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
                       <span className="text-cyan-700 dark:text-cyan-400 font-extrabold text-base">{predictionResult.confidence}%</span>
                     </div>
                     <div className="w-full bg-slate-200 dark:bg-slate-800 h-3 rounded-full overflow-hidden p-0.5 border border-slate-300 dark:border-slate-700/50">
-                      <motion.div 
+                      <motion.div
                         initial={{ width: '0%' }}
                         animate={{ width: `${predictionResult.confidence}%` }}
                         transition={{ duration: 1, ease: "easeOut" }}
-                        className="bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-500 h-full rounded-full shadow-md shadow-cyan-500/30"
+                        className="bg-linear-to-r from-cyan-500 via-purple-500 to-purple-500 h-full rounded-full shadow-md shadow-cyan-500/30"
                       />
                     </div>
                   </div>
@@ -680,10 +677,9 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
 
                     <motion.div whileHover={{ y: -2 }} className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-blue-100 dark:border-slate-800 hover:border-amber-500/40 transition-all">
                       <span className="text-slate-500 text-[10px] block">SEVERITY LEVEL</span>
-                      <span className={`font-bold text-sm mt-0.5 block ${
-                        predictionResult.severity === 'High' ? 'text-rose-600 dark:text-rose-400' :
+                      <span className={`font-bold text-sm mt-0.5 block ${predictionResult.severity === 'High' ? 'text-rose-600 dark:text-rose-400' :
                         predictionResult.severity === 'Moderate' ? 'text-amber-600 dark:text-amber-400' : 'text-emerald-600 dark:text-emerald-400'
-                      }`}>
+                        }`}>
                         {predictionResult.severity}
                       </span>
                     </motion.div>
@@ -700,7 +696,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
                     whileHover={{ scale: 1.02, boxShadow: '0 0 25px rgba(99, 102, 241, 0.4)' }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => handleReportAction(predictionResult)}
-                    className="w-full flex items-center justify-center space-x-2 py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-sm shadow-xl transition-all cursor-pointer"
+                    className="w-full flex items-center justify-center space-x-2 py-3.5 rounded-2xl bg-linear-to-r from-indigo-600 via-purple-600 to-indigo-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-sm shadow-xl transition-all cursor-pointer"
                   >
                     <FileText className="w-4 h-4" />
                     <span>Generate Printable Report</span>
@@ -709,14 +705,14 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
 
                 </motion.div>
               ) : (
-                <motion.div 
+                <motion.div
                   key="result-awaiting"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   className="py-12 text-center space-y-4"
                 >
-                  <motion.div 
+                  <motion.div
                     animate={{ scale: [1, 1.1, 1] }}
                     transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                     className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/80 border border-blue-100 dark:border-slate-800 w-fit mx-auto text-cyan-600 dark:text-cyan-400 shadow-lg shadow-cyan-500/10"

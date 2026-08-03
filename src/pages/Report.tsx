@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { 
-  Printer, Download, Share2, PlusCircle, Brain, Shield, FileCheck, 
+import {
+  Printer, Download, Share2, PlusCircle, Brain, Shield, FileCheck,
   CheckCircle2, AlertTriangle, Building2, User, Calendar, Cpu, ArrowLeft
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { PredictionResult } from '../types';
 import { reportService } from '../services/reportService';
 import { MOCK_PREDICTIONS } from '../data/mockData';
-import cortexLogo from '../assets/cortex-logo-icon.png';
+import cortexLogo from '../assets/cortex-logo-clean.png';
 
 interface ReportProps {
   prediction?: PredictionResult | null;
@@ -45,14 +45,14 @@ export const Report: React.FC<ReportProps> = ({ prediction, onNewPrediction, onB
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
       className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 relative"
     >
       {/* Background ambient glow blob */}
-      <motion.div 
+      <motion.div
         animate={{
           scale: [1, 1.15, 1],
           opacity: [0.15, 0.25, 0.15],
@@ -62,9 +62,9 @@ export const Report: React.FC<ReportProps> = ({ prediction, onNewPrediction, onB
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gradient-to-r from-purple-500/20 via-cyan-500/20 to-emerald-500/15 rounded-full blur-3xl pointer-events-none -z-10"
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-linear-to-r from-purple-500/20 via-cyan-500/20 to-emerald-500/15 rounded-full blur-3xl pointer-events-none -z-10"
       />
-      
+
       {/* Top Controls Bar (hidden during printing) */}
       <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900/90 backdrop-blur-xl border border-blue-200 dark:border-slate-800 hover:border-cyan-500/30 shadow-lg shadow-cyan-500/5 transition-all duration-300 print:hidden">
         <button
@@ -112,12 +112,12 @@ export const Report: React.FC<ReportProps> = ({ prediction, onNewPrediction, onB
       </div>
 
       {/* PRINTABLE REPORT CONTAINER (White / High Contrast Medical Page) */}
-      <motion.div 
+      <motion.div
         whileHover={{ y: -2 }}
         transition={{ duration: 0.3 }}
         className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-slate-900/90 backdrop-blur-xl border border-blue-200 dark:border-slate-800 hover:border-purple-500/40 text-slate-900 dark:text-slate-100 shadow-xl space-y-8 transition-all duration-500 print:bg-white print:text-slate-900 print:shadow-none print:border-none print:p-0"
       >
-        
+
         {/* REPORT HEADER */}
         <div className="pb-6 border-b-2 border-slate-200 dark:border-slate-700/80 print:border-slate-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center space-x-3.5">
@@ -148,7 +148,7 @@ export const Report: React.FC<ReportProps> = ({ prediction, onNewPrediction, onB
         </div>
 
         {/* PATIENT INFORMATION GRID CARD */}
-        <motion.div 
+        <motion.div
           whileHover={{ scale: 1.005 }}
           className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-950/80 print:bg-slate-100 border border-blue-100 dark:border-slate-800 hover:border-cyan-500/30 print:border-slate-300 space-y-3 shadow-inner transition-colors duration-300"
         >
@@ -181,10 +181,10 @@ export const Report: React.FC<ReportProps> = ({ prediction, onNewPrediction, onB
 
         {/* PREDICTION RESULT & SCAN PREVIEW */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-          
+
           {/* MRI Image Scan Box */}
           <div className="md:col-span-5 flex flex-col items-center">
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.03 }}
               className="relative w-56 h-56 rounded-2xl overflow-hidden border-2 border-cyan-500/50 bg-black shadow-[0_0_30px_rgba(6,182,212,0.3)] hover:shadow-[0_0_40px_rgba(6,182,212,0.5)] transition-all duration-300"
             >
@@ -197,19 +197,18 @@ export const Report: React.FC<ReportProps> = ({ prediction, onNewPrediction, onB
 
           {/* AI Result Box */}
           <div className="md:col-span-7 space-y-4">
-            
-            <motion.div 
+
+            <motion.div
               animate={{
                 boxShadow: activePrediction?.tumorDetected
                   ? ['0 0 20px rgba(244,63,94,0.15)', '0 0 35px rgba(244,63,94,0.35)', '0 0 20px rgba(244,63,94,0.15)']
                   : ['0 0 20px rgba(16,185,129,0.15)', '0 0 35px rgba(16,185,129,0.35)', '0 0 20px rgba(16,185,129,0.15)']
               }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-              className={`p-6 rounded-2xl border transition-all duration-300 ${
-                activePrediction?.tumorDetected
-                  ? 'bg-rose-500/10 border-rose-500/50 text-rose-800 dark:text-rose-300 print:bg-rose-50 print:border-rose-300 print:text-rose-900'
-                  : 'bg-emerald-500/10 border-emerald-500/50 text-emerald-800 dark:text-emerald-300 print:bg-emerald-50 print:border-emerald-300 print:text-emerald-900'
-              }`}
+              className={`p-6 rounded-2xl border transition-all duration-300 ${activePrediction?.tumorDetected
+                ? 'bg-rose-500/10 border-rose-500/50 text-rose-800 dark:text-rose-300 print:bg-rose-50 print:border-rose-300 print:text-rose-900'
+                : 'bg-emerald-500/10 border-emerald-500/50 text-emerald-800 dark:text-emerald-300 print:bg-emerald-50 print:border-emerald-300 print:text-emerald-900'
+                }`}
             >
               <div className="flex items-center space-x-3 mb-2">
                 {activePrediction?.tumorDetected ? (
@@ -250,7 +249,7 @@ export const Report: React.FC<ReportProps> = ({ prediction, onNewPrediction, onB
         </div>
 
         {/* AI RECOMMENDATIONS CARD */}
-        <motion.div 
+        <motion.div
           whileHover={{ scale: 1.005 }}
           className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-950/80 print:bg-slate-100 border border-blue-100 dark:border-slate-800 hover:border-indigo-500/30 print:border-slate-300 space-y-3 transition-colors duration-300"
         >

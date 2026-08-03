@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { 
-  Upload, Sparkles, FileText, Clock, Moon, Activity, 
+import {
+  Upload, Sparkles, FileText, Clock, Moon, Activity,
   ShieldCheck, Microscope, Zap, Eye, Cpu, CheckCircle2,
   Lock, BarChart3, Database, Layers
 } from 'lucide-react';
@@ -108,8 +108,8 @@ export const Features: React.FC<FeaturesProps> = ({ onStartPrediction }) => {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: { duration: 0.5, ease: "easeOut" }
     }
@@ -117,22 +117,22 @@ export const Features: React.FC<FeaturesProps> = ({ onStartPrediction }) => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16 overflow-hidden">
-      
+
       {/* HERO / HEADER SECTION */}
       <div className="relative text-center max-w-3xl mx-auto space-y-4">
-        
+
         {/* Floating Background Glow Orbs */}
-        <motion.div 
-          animate={{ 
+        <motion.div
+          animate={{
             y: [0, -20, 0],
             scale: [1, 1.15, 1],
             opacity: [0.2, 0.4, 0.2]
           }}
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-16 left-1/2 -translate-x-1/2 w-96 h-96 bg-cyan-500/20 dark:bg-cyan-500/15 rounded-full blur-[100px] pointer-events-none" 
+          className="absolute -top-16 left-1/2 -translate-x-1/2 w-96 h-96 bg-cyan-500/20 dark:bg-cyan-500/15 rounded-full blur-[100px] pointer-events-none"
         />
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -143,19 +143,19 @@ export const Features: React.FC<FeaturesProps> = ({ onStartPrediction }) => {
           <span>Neuro-Diagnostic Platform</span>
         </motion.div>
 
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight"
         >
           <span className="text-purple-600 dark:text-white">Comprehensive</span> <br />
-          <span className="bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-700 dark:from-cyan-400 dark:via-sky-300 dark:to-indigo-300 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-cyan-600 via-blue-600 to-indigo-700 dark:from-cyan-400 dark:via-sky-300 dark:to-indigo-300 bg-clip-text text-transparent">
             AI Diagnostic Suite
           </span>
         </motion.h1>
 
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -167,7 +167,7 @@ export const Features: React.FC<FeaturesProps> = ({ onStartPrediction }) => {
       </div>
 
       {/* FEATURE CARDS GRID */}
-      <motion.div 
+      <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -175,7 +175,7 @@ export const Features: React.FC<FeaturesProps> = ({ onStartPrediction }) => {
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10"
       >
         {featureList.map((f, idx) => (
-          <motion.div 
+          <motion.div
             key={idx}
             variants={itemVariants}
             whileHover={{ scale: 1.04, y: -8 }}
@@ -185,7 +185,7 @@ export const Features: React.FC<FeaturesProps> = ({ onStartPrediction }) => {
             <div className={`absolute -top-12 -right-12 w-32 h-32 ${f.glowBg} rounded-full blur-2xl group-hover:scale-175 transition-transform duration-500 pointer-events-none`} />
 
             <div className="space-y-4 relative z-10">
-              
+
               {/* Header Badge & Icon Row */}
               <div className="flex items-center justify-between">
                 <div className="p-3.5 rounded-2xl bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-md">
@@ -229,12 +229,12 @@ export const Features: React.FC<FeaturesProps> = ({ onStartPrediction }) => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-sky-100 via-blue-50 to-cyan-100 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 border border-sky-300 dark:border-slate-800 shadow-xl relative overflow-hidden"
+        className="p-8 sm:p-10 rounded-3xl bg-linear-to-r from-sky-100 via-blue-50 to-cyan-100 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 border border-sky-300 dark:border-slate-800 shadow-xl relative overflow-hidden"
       >
         <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-          
+
           <div className="lg:col-span-7 space-y-4 text-left">
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-600/30 dark:border-cyan-500/30 text-cyan-800 dark:text-cyan-300 text-xs font-mono font-bold">
               <Zap className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 animate-bounce" />
@@ -249,7 +249,7 @@ export const Features: React.FC<FeaturesProps> = ({ onStartPrediction }) => {
           </div>
 
           <div className="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-3">
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.02 }}
               className="p-4 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-700 shadow-md flex items-center space-x-3"
             >
@@ -262,7 +262,7 @@ export const Features: React.FC<FeaturesProps> = ({ onStartPrediction }) => {
               </div>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.02 }}
               className="p-4 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-700 shadow-md flex items-center space-x-3"
             >
@@ -279,8 +279,6 @@ export const Features: React.FC<FeaturesProps> = ({ onStartPrediction }) => {
         </div>
       </motion.div>
 
-      {/* CTA SECTION */}
-      <CtaSection onStartPrediction={onStartPrediction} />
 
     </div>
   );
