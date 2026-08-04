@@ -38,7 +38,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
   // Image Upload & Sample Selection
   const [mriFile, setMriFile] = useState<File | null>(null);
   const [mriPreview, setMriPreview] = useState<string>(SAMPLE_MRI_IMAGES.brainGlioma);
-  const [selectedSampleType, setSelectedSampleType] = useState<TumorType | undefined>('Glioma');
+  const [selectedSampleType, setSelectedSampleType] = useState<TumorType | undefined>(undefined);
   const [isDragging, setIsDragging] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(false);
 
@@ -90,14 +90,6 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
     }
   };
 
-  const selectSample = (type: TumorType, sampleUrl: string) => {
-    setSelectedSampleType(type);
-    setMriFile(null);
-    setIsImageLoading(true);
-    setMriPreview(sampleUrl);
-    setTimeout(() => setIsImageLoading(false), 250);
-  };
-
   const handleAnalyze = async () => {
     setLoading(true);
     setPredictionResult(null);
@@ -132,7 +124,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
   const handleReset = () => {
     setMriFile(null);
     setMriPreview(SAMPLE_MRI_IMAGES.brainGlioma);
-    setSelectedSampleType('Glioma');
+    setSelectedSampleType(undefined);
     setPredictionResult(null);
   };
 
@@ -219,32 +211,6 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
                 <span>1. MRI Image Upload &amp; Sample Selection</span>
               </span>
               <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Supported: PNG, JPG, JPEG, DICOM</span>
-            </div>
-
-            {/* Quick Sample Selector Buttons */}
-            <div className="space-y-2">
-              <p className="text-[11px] font-mono text-slate-600 dark:text-slate-400">Quick Test Samples:</p>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                {[
-                  { label: 'Glioma Scan', type: 'Glioma' as TumorType, url: SAMPLE_MRI_IMAGES.brainGlioma },
-                  { label: 'Meningioma', type: 'Meningioma' as TumorType, url: SAMPLE_MRI_IMAGES.brainMeningioma },
-                  { label: 'Pituitary Scan', type: 'Pituitary' as TumorType, url: SAMPLE_MRI_IMAGES.brainPituitary },
-                  { label: 'Normal Brain', type: 'No Tumor' as TumorType, url: SAMPLE_MRI_IMAGES.brainNormal }
-                ].map((s) => (
-                  <motion.button
-                    key={s.type}
-                    whileHover={{ scale: 1.04 }}
-                    whileTap={{ scale: 0.96 }}
-                    onClick={() => selectSample(s.type, s.url)}
-                    className={`px-2.5 py-1.5 rounded-xl text-xs font-medium font-mono border transition-all cursor-pointer ${selectedSampleType === s.type
-                      ? 'bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 border-cyan-500/60 font-bold shadow-md shadow-cyan-500/20'
-                      : 'bg-slate-100 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800'
-                      }`}
-                  >
-                    {s.label}
-                  </motion.button>
-                ))}
-              </div>
             </div>
 
             {/* Drag and Drop Zone with Glow */}

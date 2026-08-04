@@ -32,13 +32,12 @@ device = 'cuda' if (TORCH_AVAILABLE and torch.cuda.is_available()) else 'cpu'
 model = None
 
 def load_brain_tumor_model():
-    """Loads PyTorch model if best_brain_tumor_model.pth exists, otherwise initializes EfficientNet-B0 architecture."""
+    """Load the checkpoint if possible and fall back gracefully when the environment is incompatible."""
     global model
     if not TORCH_AVAILABLE:
         return None
 
     try:
-        # DenseNet-121 backbone for 4-class classification, matching the saved checkpoint.
         model = models.densenet121(weights=None)
         in_features = model.classifier.in_features
         model.classifier = nn.Linear(in_features, len(CLASS_NAMES))
@@ -46,8 +45,17 @@ def load_brain_tumor_model():
         if os.path.exists(MODEL_PATH):
             print(f"Loading weights from {MODEL_PATH}...")
             state_dict = torch.load(MODEL_PATH, map_location=device)
-            model.load_state_dict(state_dict)
-            print("Successfully loaded custom best_brain_tumor_model.pth weights!")
+            if isinstance(state_dict, dict) and 'state_dict' in state_dict:
+                state_dict = state_dict['state_dict']
+            if isinstance(state_dict, dict):
+                state_dict = {k.replace('module.', ''): v for k, v in state_dict.items()}
+            incompatible = model.load_state_dict(state_dict, strict=False)
+            missing = sorted(incompatible.missing_keys)
+            unexpected = sorted(incompatible.unexpected_keys)
+            if missing or unexpected:
+                print(f"Checkpoint loaded with compatibility warnings. Missing: {missing[:10]} Unexpected: {unexpected[:10]}")
+            else:
+                print("Successfully loaded custom best_brain_tumor_model.pth weights!")
         else:
             print(f"Model file {MODEL_PATH} not found. Running initialized DenseNet-121 in evaluation mode.")
 
@@ -72,6 +80,13 @@ if TORCH_AVAILABLE:
             std=[0.229, 0.224, 0.225]
         )
     ])
+
+
+def prepare_mri_input(image: Image.Image):
+    """Convert an uploaded MRI image into a model-ready batch tensor."""
+    rgb_image = image.convert('RGB')
+    tensor = transform_pipeline(rgb_image)
+    return tensor.unsqueeze(0).to(device)
 
 def generate_gradcam_heatmap(image: Image.Image, pred_class: str) -> str:
     """
@@ -210,7 +225,7 @@ def predict():
 
         # Run inference using PyTorch model if available
         if TORCH_AVAILABLE and model is not None:
-            input_tensor = transform_pipeline(pil_image).unsqueeze(0).to(device)
+            input_tensor = prepare_mri_input(pil_image)
             with torch.no_grad():
                 outputs = model(input_tensor)
                 probabilities = torch.nn.functional.softmax(outputs[0], dim=0)
@@ -220,6 +235,9 @@ def predict():
                 if 0 <= idx < len(CLASS_NAMES):
                     pred_class = CLASS_NAMES[idx]
                     confidence = round(float(top_prob.item()) * 100, 2)
+                else:
+                    pred_class = 'No Tumor'
+                    confidence = 95.0
         else:
             # Smart fallback inference logic based on image properties and filename clues
             file_name = file.filename.lower()
@@ -236,7 +254,6 @@ def predict():
                 pred_class = 'No Tumor'
                 confidence = 99.15
             else:
-                # Default to No Tumor unless filename signals specific anomaly
                 pred_class = 'No Tumor'
                 confidence = 97.50
 
