@@ -1,24 +1,41 @@
 # CORTEX-VISION
 
-AI-powered Brain Tumor MRI Classification and Explainability System using React, TypeScript, Vite, Tailwind CSS, Flask, and PyTorch. 
-## Technologies Used
-
-### Frontend
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-
-### Backend
-- Python
-- Flask
-- PyTorch
-- TorchVision
-- OpenCV
+**CORTEX-VISION** is an AI-powered Brain Tumor MRI Classification and Explainability System that enables users to upload brain MRI scans, receive tumor classification predictions, and visualize AI decision-making through explainability techniques. The application combines a modern React frontend with a Flask and PyTorch backend to deliver fast, accurate, and user-friendly predictions.
 
 ---
 
-## Project Structure
+#  Features
+
+*  Brain MRI tumor classification using a trained PyTorch model
+*  Upload MRI images through an intuitive web interface
+*  Fast real-time predictions
+*  AI explainability visualization
+*  Prediction history
+*  Fully responsive user interface
+*  Modern UI built with React, TypeScript, Vite, and Tailwind CSS
+
+---
+
+#  Tech Stack
+
+## Frontend
+
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+
+## Backend
+
+* Python
+* Flask
+* PyTorch
+* TorchVision
+* OpenCV
+
+---
+
+#  Project Structure
 
 ```text
 cortex-vision/
@@ -28,8 +45,8 @@ cortex-vision/
 │   ├── requirements.txt
 │   └── best_brain_tumor_model.pth
 │
-├── src/
 ├── public/
+├── src/
 ├── package.json
 ├── vite.config.ts
 ├── tsconfig.json
@@ -38,53 +55,93 @@ cortex-vision/
 
 ---
 
-## Frontend Setup
+#  Getting Started
+
+## 1️⃣ Clone the Repository
 
 ```bash
-git clone <repository-url>
-cd cortex-vision
+git clone https://github.com/sadhukhanankita2025/CORTEX-VISION.git
+cd CORTEX-VISION
+```
 
+---
+
+## 2️⃣ Install Frontend Dependencies
+
+```bash
 npm install
+```
+
+---
+
+## 3️⃣ Start the Frontend
+
+```bash
 npm run dev
 ```
 
-Frontend runs at:
+The frontend will be available at:
 
-```
+```text
 http://localhost:5173
 ```
 
 ---
 
-## Backend Setup
+## 4️⃣ Setup the Backend
+
+Navigate to the backend directory:
 
 ```bash
 cd backend
+```
 
+Install the required Python packages:
+
+```bash
 pip install -r requirements.txt
+```
+
+Start the Flask server:
+
+```bash
 python app.py
 ```
 
-Backend runs at:
+The backend will run at:
 
-```
+```text
 http://localhost:5000
 ```
 
 ---
 
-## Environment Variable
-
-Create a `.env` file in the project root:
-
-```env
-VITE_API_URL=http://localhost:5000
-```
-
----
-
-## Build Frontend
+# 🏗️ Build for Production
 
 ```bash
 npm run build
 ```
+
+---
+
+# 📦 Backend Requirements
+
+Install all required Python libraries using:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+# 📸 Model
+
+The project uses a trained **PyTorch EfficientNet-based Brain Tumor Classification Model** stored as:
+
+```text
+backend/best_brain_tumor_model.pth
+```
+
+# ⭐ Support
+
+If you found this project useful, consider giving it a ⭐ on GitHub!
