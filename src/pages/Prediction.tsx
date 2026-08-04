@@ -22,15 +22,15 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
   };
   // Form State
   const [patient, setPatient] = useState<PatientInfo>({
-    patientId: `PT-${Math.floor(100000 + Math.random() * 900000)}`,
-    patientName: 'ABC',
-    age: 30,
-    gender: 'Male',
-    phone: '+1 (555) 000-0000',
-    email: 'abc@hospital.com',
-    hospital: 'ABC Medical Center',
-    doctor: 'Dr. ABC, MD',
-    symptoms: 'Routine cranial MRI scan evaluation.',
+    patientId: '',
+    patientName: '',
+    age: '',
+    gender: '' as PatientInfo['gender'],
+    phone: '',
+    email: '',
+    hospital: '',
+    doctor: '',
+    symptoms: '',
     notes: 'T1-weighted contrast-enhanced MRI scan.',
     examinationDate: new Date().toISOString().split('T')[0]
   });
