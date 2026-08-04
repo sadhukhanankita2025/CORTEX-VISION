@@ -180,7 +180,7 @@ export const History: React.FC<HistoryProps> = ({ onViewReport }) => {
                 <th className="px-6 py-4">Prediction Class</th>
                 <th className="px-6 py-4">Confidence</th>
                 <th className="px-6 py-4">Attending Doctor</th>
-                <th className="px-6 py-4">Exam Date</th>
+                <th className="px-6 py-4">Test Date</th>
                 <th className="px-6 py-4">Status</th>
                 <th className="px-6 py-4 text-right">Actions</th>
               </tr>
