@@ -20,6 +20,17 @@ export const Report: React.FC<ReportProps> = ({ prediction, onNewPrediction, onB
   const [downloading, setDownloading] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  const reportDate = activePrediction?.examinationDate || new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  });
+  const reportModel = 'EfficientNetB0';
+  const predictedClass = activePrediction?.predictionClass || 'No Tumor';
+  const severity = activePrediction?.severity || 'None';
+  const confidencePercent = `${Math.round(activePrediction?.confidence ?? 0)}%`;
+  const inferenceTime = activePrediction?.inferenceTime || '0.25 sec';
+
   const handlePrint = () => {
     window.print();
   };
@@ -51,6 +62,28 @@ export const Report: React.FC<ReportProps> = ({ prediction, onNewPrediction, onB
       transition={{ duration: 0.4 }}
       className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 relative"
     >
+      <style>{`
+        @page {
+          size: A4;
+          margin: 10mm;
+        }
+
+        @media print {
+          body {
+            background: #ffffff !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
+
+          .print-report-card {
+            display: block !important;
+          }
+
+          .report-screen-shell {
+            display: none !important;
+          }
+        }
+      `}</style>
       {/* Background ambient glow blob */}
       <motion.div
         animate={{
@@ -115,7 +148,7 @@ export const Report: React.FC<ReportProps> = ({ prediction, onNewPrediction, onB
       <motion.div
         whileHover={{ y: -2 }}
         transition={{ duration: 0.3 }}
-        className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-slate-900/90 backdrop-blur-xl border border-blue-200 dark:border-slate-800 hover:border-purple-500/40 text-slate-900 dark:text-slate-100 shadow-xl space-y-8 transition-all duration-500 print:bg-white print:text-slate-900 print:shadow-none print:border-none print:p-0"
+        className="report-screen-shell p-8 sm:p-12 rounded-3xl bg-white dark:bg-slate-900/90 backdrop-blur-xl border border-blue-200 dark:border-slate-800 hover:border-purple-500/40 text-slate-900 dark:text-slate-100 shadow-xl space-y-8 transition-all duration-500 print:bg-white print:text-slate-900 print:shadow-none print:border-none print:p-0"
       >
 
         {/* REPORT HEADER */}
@@ -281,6 +314,107 @@ export const Report: React.FC<ReportProps> = ({ prediction, onNewPrediction, onB
         </div>
 
       </motion.div>
+
+      <div className="hidden print:block print-report-card">
+        <div className="bg-white text-slate-900" style={{ fontFamily: 'Arial, sans-serif' }}>
+          <div className="rounded-[18px] border border-slate-200 p-6 shadow-sm" style={{ borderColor: '#dbe7f2' }}>
+            <div className="flex items-start justify-between gap-4 border-b border-slate-200 pb-4">
+              <div className="flex items-center gap-3">
+                <img src={cortexLogo} alt="CORTEX VISION" className="h-10 w-auto" />
+                <div>
+                  <div className="text-[20px] font-black tracking-tight text-[#0F4C81]">CORTEX VISION</div>
+                  <div className="text-[12px] font-semibold text-slate-700">ABC Medical Center</div>
+                  <div className="text-[12px] font-semibold text-slate-600">Brain Tumor AI Diagnostic Report</div>
+                </div>
+              </div>
+              <div className="text-right text-[11px] text-slate-600">
+                <div><strong>Report ID:</strong> {activePrediction?.id}</div>
+                <div><strong>Report Date:</strong> {reportDate}</div>
+                <div><strong>Model Used:</strong> {reportModel}</div>
+              </div>
+            </div>
+
+            <div className="mt-4 rounded-[14px] border border-slate-200 bg-slate-50 p-4">
+              <div className="mb-3 border-b border-slate-200 pb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#0F4C81]">
+                Patient & Clinical Metadata
+              </div>
+              <div className="grid grid-cols-2 gap-3 text-[11px] text-slate-700">
+                <div><span className="block text-[10px] font-semibold uppercase text-slate-500">Patient Name</span><span className="font-semibold text-slate-900">{activePrediction?.patientName}</span></div>
+                <div><span className="block text-[10px] font-semibold uppercase text-slate-500">Patient ID</span><span className="font-semibold text-slate-900">{activePrediction?.patientId}</span></div>
+                <div><span className="block text-[10px] font-semibold uppercase text-slate-500">Age</span><span className="font-semibold text-slate-900">{activePrediction?.age}</span></div>
+                <div><span className="block text-[10px] font-semibold uppercase text-slate-500">Gender</span><span className="font-semibold text-slate-900">{activePrediction?.gender}</span></div>
+                <div><span className="block text-[10px] font-semibold uppercase text-slate-500">Attending Doctor</span><span className="font-semibold text-slate-900">{activePrediction?.doctor}</span></div>
+                <div><span className="block text-[10px] font-semibold uppercase text-slate-500">Reported Symptoms</span><span className="font-semibold text-slate-900">{activePrediction?.symptoms}</span></div>
+              </div>
+            </div>
+
+            <div className="mt-4 rounded-[14px] border border-slate-200 bg-white p-4">
+              <div className="mb-3 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-[#0F4C81]">
+                MRI Scan Image
+              </div>
+              <div className="flex justify-center">
+                <img
+                  src={activePrediction?.mriImageUrl}
+                  alt="MRI scan"
+                  className="max-h-70 w-auto rounded-lg border border-slate-300 object-contain p-2"
+                />
+              </div>
+              <div className="mt-2 text-center text-[11px] font-semibold text-slate-600">T1-Weighted MRI Scan</div>
+            </div>
+
+            <div className="mt-4 rounded-[14px] border border-slate-200 bg-slate-50 p-4">
+              <div className="mb-3 border-b border-slate-200 pb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#0F4C81]">
+                Diagnostic Prediction
+              </div>
+              <div className="grid grid-cols-2 gap-3 text-[11px] text-slate-700">
+                <div className="rounded-lg border border-slate-200 bg-white p-3">
+                  <div className="text-[10px] font-semibold uppercase text-slate-500">Predicted Class</div>
+                  <div className="mt-1 text-[13px] font-bold text-slate-900">{predictedClass}</div>
+                </div>
+                <div className="rounded-lg border border-slate-200 bg-white p-3">
+                  <div className="text-[10px] font-semibold uppercase text-slate-500">Severity</div>
+                  <div className="mt-1 text-[13px] font-bold text-slate-900">{severity}</div>
+                </div>
+                <div className="rounded-lg border border-slate-200 bg-white p-3">
+                  <div className="text-[10px] font-semibold uppercase text-slate-500">Confidence (%)</div>
+                  <div className="mt-1 text-[13px] font-bold text-slate-900">{confidencePercent}</div>
+                </div>
+                <div className="rounded-lg border border-slate-200 bg-white p-3">
+                  <div className="text-[10px] font-semibold uppercase text-slate-500">Inference Time</div>
+                  <div className="mt-1 text-[13px] font-bold text-slate-900">{inferenceTime}</div>
+                </div>
+              </div>
+              <div className="mt-3 rounded-lg border border-slate-200 bg-white p-3 text-[11px] leading-5 text-slate-700">
+                <div className="text-[10px] font-semibold uppercase text-slate-500">AI Summary</div>
+                <div className="mt-1 text-slate-900">{activePrediction?.aiSummary}</div>
+              </div>
+            </div>
+
+            <div className="mt-4 rounded-[14px] border border-slate-200 bg-white p-4">
+              <div className="mb-3 border-b border-slate-200 pb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#0F4C81]">
+                Suggested Clinical Recommendations
+              </div>
+              <ul className="space-y-2 text-[11px] leading-5 text-slate-700">
+                {activePrediction?.recommendations?.map((rec, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="text-[#0F4C81]">•</span>
+                    <span>{rec}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="mt-5 border-t border-slate-200 pt-3 text-center text-[10px] leading-5 text-slate-600">
+              <div>-------------------------------------------------------</div>
+              <div>AI-generated diagnostic assistance.</div>
+              <div>This report is for research and educational purposes only.</div>
+              <div>Always consult a qualified medical professional.</div>
+              <div>Generated by CORTEX VISION AI.</div>
+              <div>-------------------------------------------------------</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
     </motion.div>
   );
