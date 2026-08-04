@@ -6,7 +6,7 @@ export interface PredictionResult {
   id: string;
   patientId: string;
   patientName: string;
-  age: number;
+  age: number | string;
   gender: 'Male' | 'Female' | 'Other';
   phone?: string;
   email?: string;
@@ -15,18 +15,18 @@ export interface PredictionResult {
   examinationDate: string;
   symptoms: string;
   notes?: string;
-  
+
   // Model prediction outputs
   tumorDetected: boolean;
   predictionClass: TumorType;
   confidence: number; // e.g. 94.81
   inferenceTime: string; // e.g. "0.82 sec"
   modelUsed: string; // e.g. "EfficientNetB0 (best_brain_tumor_model.pth)"
-  
+
   // Images
   mriImageUrl: string;
   heatmapImageUrl?: string; // Grad-CAM visualization
-  
+
   // Medical summary & recommendations
   aiSummary: string;
   recommendations: string[];

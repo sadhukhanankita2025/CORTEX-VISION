@@ -28,19 +28,19 @@ export const predictionService = {
         if (response.ok) {
           const apiData = await response.json();
           const isTumor = apiData.prediction_class !== 'No Tumor';
-          
+
           return {
             id: `NV-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`,
-            patientId: patient.patientId || `PT-${Math.floor(100000 + Math.random() * 900000)}`,
-            patientName: patient.patientName || 'ABC',
-            age: Number(patient.age) || 30,
-            gender: patient.gender || 'Male',
-            phone: patient.phone || '+1 (555) 000-0000',
-            email: patient.email || 'abc@hospital.com',
-            hospital: patient.hospital || 'ABC Medical Center',
-            doctor: patient.doctor || 'Dr. ABC, MD',
+            patientId: patient.patientId || '',
+            patientName: patient.patientName || '',
+            age: typeof patient.age === 'number' ? patient.age : (patient.age ? Number(patient.age) : ''),
+            gender: patient.gender || '',
+            phone: patient.phone || '',
+            email: patient.email || '',
+            hospital: patient.hospital || '',
+            doctor: patient.doctor || '',
             examinationDate: patient.examinationDate || new Date().toISOString().split('T')[0],
-            symptoms: patient.symptoms || 'Diagnostic screening MRI evaluation.',
+            symptoms: patient.symptoms || '',
             notes: patient.notes || 'PyTorch best_brain_tumor_model.pth live backend inference.',
             tumorDetected: isTumor,
             predictionClass: apiData.prediction_class as TumorType,
@@ -67,7 +67,7 @@ export const predictionService = {
 
     // Determine tumor class for mock demo
     let selectedType: TumorType = sampleType || 'Glioma';
-    
+
     // If user uploaded a custom file, check filename for tumor clues or default intelligently
     if (!sampleType && mriImageFileOrUrl instanceof File) {
       const fileName = mriImageFileOrUrl.name.toLowerCase();
@@ -141,16 +141,16 @@ export const predictionService = {
 
     const newResult: PredictionResult = {
       id: `NV-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`,
-      patientId: patient.patientId || `PT-${Math.floor(100000 + Math.random() * 900000)}`,
-      patientName: patient.patientName || 'ABC',
-      age: Number(patient.age) || 30,
-      gender: patient.gender || 'Male',
-      phone: patient.phone || '+1 (555) 000-0000',
-      email: patient.email || 'abc@hospital.com',
-      hospital: patient.hospital || 'ABC Medical Center',
-      doctor: patient.doctor || 'Dr. ABC, MD',
+      patientId: patient.patientId || '',
+      patientName: patient.patientName || '',
+      age: typeof patient.age === 'number' ? patient.age : (patient.age ? Number(patient.age) : ''),
+      gender: patient.gender || '',
+      phone: patient.phone || '',
+      email: patient.email || '',
+      hospital: patient.hospital || '',
+      doctor: patient.doctor || '',
       examinationDate: patient.examinationDate || new Date().toISOString().split('T')[0],
-      symptoms: patient.symptoms || 'Diagnostic screening MRI evaluation.',
+      symptoms: patient.symptoms || '',
       notes: patient.notes || 'AI-assisted Deep Learning analysis run on Edge GPU.',
       tumorDetected: isTumor,
       predictionClass: selectedType,
