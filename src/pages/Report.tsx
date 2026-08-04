@@ -55,7 +55,7 @@ export const Report: React.FC<ReportProps> = ({ prediction, onNewPrediction, onB
       if (activePrediction) {
         await reportService.generatePdfReport(activePrediction);
       }
-      window.print(); // Fallback print to PDF dialog
+      window.print();
     } catch (err) {
       console.error('Report error:', err);
     } finally {
@@ -79,18 +79,21 @@ export const Report: React.FC<ReportProps> = ({ prediction, onNewPrediction, onB
       <style>{`
         @page {
           size: A4;
-          margin: 10mm;
+          margin: 0mm;
         }
 
         @media print {
-          body * {
-            visibility: hidden !important;
-          }
-
-          body {
+          html, body {
+            height: 100% !important;
+            max-height: 100% !important;
+            overflow: hidden !important;
             background: #ffffff !important;
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
+          }
+
+          body * {
+            visibility: hidden !important;
           }
 
           .print-report-card,
@@ -100,19 +103,22 @@ export const Report: React.FC<ReportProps> = ({ prediction, onNewPrediction, onB
 
           .print-report-card {
             position: absolute !important;
-            left: 0;
-            top: 0;
-            width: 100% !important;
-            max-width: 100% !important;
+            left: 0 !important;
+            top: 0 !important;
+            width: 210mm !important;
+            height: 297mm !important;
+            max-height: 297mm !important;
             margin: 0 !important;
-            padding: 0 !important;
+            padding: 8mm !important;
             display: block !important;
             box-shadow: none !important;
             border: none !important;
+            box-sizing: border-box !important;
+            overflow: hidden !important;
           }
 
           .report-screen-shell,
-          .print\:hidden {
+          .print\\:hidden {
             display: none !important;
           }
         }
@@ -349,89 +355,89 @@ export const Report: React.FC<ReportProps> = ({ prediction, onNewPrediction, onB
       </motion.div>
 
       <div ref={reportRef} className="hidden print:block print-report-card">
-        <div className="bg-white text-slate-900" style={{ fontFamily: 'Arial, sans-serif', fontSize: '8pt', lineHeight: 1.2 }}>
-          <div className="rounded-[10px] border border-slate-200 p-2" style={{ borderColor: '#dbe7f2', boxSizing: 'border-box' }}>
-            <div className="flex items-start justify-between gap-2 border-b border-slate-200 pb-2" style={{ pageBreakInside: 'avoid' }}>
+        <div className="bg-white text-slate-900" style={{ fontFamily: 'Arial, sans-serif', fontSize: '7.5pt', lineHeight: 1.15 }}>
+          <div className="rounded-[8px] border border-slate-200 p-1.5" style={{ borderColor: '#dbe7f2', boxSizing: 'border-box' }}>
+            <div className="flex items-start justify-between gap-2 border-b border-slate-200 pb-1.5" style={{ pageBreakInside: 'avoid' }}>
               <div className="flex items-center gap-2">
-                <img src={cortexLogo} alt="CORTEX VISION" className="h-6 w-auto" />
+                <img src={cortexLogo} alt="CORTEX VISION" className="h-5 w-auto" />
                 <div>
-                  <div className="text-[18px] font-black tracking-tight text-[#0F4C81]">CORTEX VISION</div>
-                  <div className="text-[8.5px] font-semibold text-slate-700">{reportHospital}</div>
-                  <div className="text-[8.5px] font-semibold text-slate-600">Brain Tumor AI Diagnostic Report</div>
+                  <div className="text-[16px] font-black tracking-tight text-[#0F4C81]">CORTEX VISION</div>
+                  <div className="text-[7.5px] font-semibold text-slate-700">{reportHospital}</div>
+                  <div className="text-[7.5px] font-semibold text-slate-600">Brain Tumor AI Diagnostic Report</div>
                 </div>
               </div>
-              <div className="text-right text-[7.5px] text-slate-600" style={{ minWidth: '110px' }}>
+              <div className="text-right text-[7px] text-slate-600" style={{ minWidth: '100px' }}>
                 <div><strong>Report ID:</strong> {activePrediction?.id}</div>
                 <div><strong>Report Date:</strong> {reportDate}</div>
                 <div><strong>Model Used:</strong> {reportModel}</div>
               </div>
             </div>
 
-            <div className="mt-2 rounded-lg border border-slate-200 bg-slate-50 p-2" style={{ pageBreakInside: 'avoid' }}>
-              <div className="mb-1 border-b border-slate-200 pb-1 text-[8.5px] font-bold uppercase tracking-[0.15em] text-[#0F4C81]">
+            <div className="mt-1.5 rounded-lg border border-slate-200 bg-slate-50 p-1.5" style={{ pageBreakInside: 'avoid' }}>
+              <div className="mb-1 border-b border-slate-200 pb-0.5 text-[7.5px] font-bold uppercase tracking-[0.15em] text-[#0F4C81]">
                 Patient & Clinical Metadata
               </div>
-              <div className="grid grid-cols-2 gap-x-2 gap-y-1 text-[7.5px] text-slate-700">
-                <div><span className="block text-[6.5px] font-semibold uppercase text-slate-500">Patient Name</span><span className="font-semibold text-slate-900">{reportPatientName}</span></div>
-                <div><span className="block text-[6.5px] font-semibold uppercase text-slate-500">Patient ID</span><span className="font-semibold text-slate-900">{reportPatientId}</span></div>
-                <div><span className="block text-[6.5px] font-semibold uppercase text-slate-500">Age</span><span className="font-semibold text-slate-900">{reportAge}</span></div>
-                <div><span className="block text-[6.5px] font-semibold uppercase text-slate-500">Gender</span><span className="font-semibold text-slate-900">{reportGender}</span></div>
-                <div><span className="block text-[6.5px] font-semibold uppercase text-slate-500">Attending Doctor</span><span className="font-semibold text-slate-900">{reportDoctor}</span></div>
-                <div><span className="block text-[6.5px] font-semibold uppercase text-slate-500">Reported Symptoms</span><span className="font-semibold text-slate-900">{reportSymptoms}</span></div>
+              <div className="grid grid-cols-2 gap-x-2 gap-y-0.5 text-[7px] text-slate-700">
+                <div><span className="block text-[6px] font-semibold uppercase text-slate-500">Patient Name</span><span className="font-semibold text-slate-900">{reportPatientName}</span></div>
+                <div><span className="block text-[6px] font-semibold uppercase text-slate-500">Patient ID</span><span className="font-semibold text-slate-900">{reportPatientId}</span></div>
+                <div><span className="block text-[6px] font-semibold uppercase text-slate-500">Age</span><span className="font-semibold text-slate-900">{reportAge}</span></div>
+                <div><span className="block text-[6px] font-semibold uppercase text-slate-500">Gender</span><span className="font-semibold text-slate-900">{reportGender}</span></div>
+                <div><span className="block text-[6px] font-semibold uppercase text-slate-500">Attending Doctor</span><span className="font-semibold text-slate-900">{reportDoctor}</span></div>
+                <div><span className="block text-[6px] font-semibold uppercase text-slate-500">Reported Symptoms</span><span className="font-semibold text-slate-900">{reportSymptoms}</span></div>
               </div>
             </div>
 
-            <div className="mt-2 flex gap-2" style={{ pageBreakInside: 'avoid' }}>
-              <div className="flex-1 rounded-lg border border-slate-200 bg-white p-2" style={{ minWidth: '0' }}>
-                <div className="mb-1 text-center text-[8.5px] font-bold uppercase tracking-[0.15em] text-[#0F4C81]">
+            <div className="mt-1.5 flex gap-2" style={{ pageBreakInside: 'avoid' }}>
+              <div className="flex-1 rounded-lg border border-slate-200 bg-white p-1.5" style={{ minWidth: '0' }}>
+                <div className="mb-1 text-center text-[7.5px] font-bold uppercase tracking-[0.15em] text-[#0F4C81]">
                   MRI Scan Image
                 </div>
                 <div className="flex justify-center">
                   <img
                     src={activePrediction?.mriImageUrl}
                     alt="MRI scan"
-                    style={{ width: '130px', height: '130px', objectFit: 'contain', borderRadius: '6px', border: '1px solid #cbd5e1', padding: '2px' }}
+                    style={{ width: '100px', height: '100px', objectFit: 'contain', borderRadius: '6px', border: '1px solid #cbd5e1', padding: '2px' }}
                   />
                 </div>
-                <div className="mt-1 text-center text-[7.5px] font-semibold text-slate-600">T1-Weighted MRI Scan</div>
+                <div className="mt-1 text-center text-[7px] font-semibold text-slate-600">T1-Weighted MRI Scan</div>
               </div>
 
-              <div className="flex-1 rounded-lg border border-slate-200 bg-slate-50 p-2" style={{ minWidth: '0' }}>
-                <div className="mb-1 border-b border-slate-200 pb-1 text-[8.5px] font-bold uppercase tracking-[0.15em] text-[#0F4C81]">
+              <div className="flex-1 rounded-lg border border-slate-200 bg-slate-50 p-1.5" style={{ minWidth: '0' }}>
+                <div className="mb-1 border-b border-slate-200 pb-0.5 text-[7.5px] font-bold uppercase tracking-[0.15em] text-[#0F4C81]">
                   Diagnostic Prediction
                 </div>
-                <div className="grid grid-cols-2 gap-1 text-[7.5px] text-slate-700">
+                <div className="grid grid-cols-2 gap-1 text-[7px] text-slate-700">
                   <div className="rounded-md border border-slate-200 bg-white p-1">
-                    <div className="text-[6.5px] font-semibold uppercase text-slate-500">Predicted Class</div>
+                    <div className="text-[6px] font-semibold uppercase text-slate-500">Predicted Class</div>
                     <div className="mt-0.5 font-bold text-slate-900">{predictedClass}</div>
                   </div>
                   <div className="rounded-md border border-slate-200 bg-white p-1">
-                    <div className="text-[6.5px] font-semibold uppercase text-slate-500">Severity</div>
+                    <div className="text-[6px] font-semibold uppercase text-slate-500">Severity</div>
                     <div className="mt-0.5 font-bold text-slate-900">{severity}</div>
                   </div>
                   <div className="rounded-md border border-slate-200 bg-white p-1">
-                    <div className="text-[6.5px] font-semibold uppercase text-slate-500">Confidence (%)</div>
+                    <div className="text-[6px] font-semibold uppercase text-slate-500">Confidence (%)</div>
                     <div className="mt-0.5 font-bold text-slate-900">{confidencePercent}</div>
                   </div>
                   <div className="rounded-md border border-slate-200 bg-white p-1">
-                    <div className="text-[6.5px] font-semibold uppercase text-slate-500">Inference Time</div>
+                    <div className="text-[6px] font-semibold uppercase text-slate-500">Inference Time</div>
                     <div className="mt-0.5 font-bold text-slate-900">{inferenceTime}</div>
                   </div>
                 </div>
-                <div className="mt-1 rounded-md border border-slate-200 bg-white p-1 text-[7px] leading-4 text-slate-700">
-                  <div className="text-[6.5px] font-semibold uppercase text-slate-500">AI Summary</div>
+                <div className="mt-1 rounded-md border border-slate-200 bg-white p-1 text-[6.5px] leading-3 text-slate-700">
+                  <div className="text-[6px] font-semibold uppercase text-slate-500">AI Summary</div>
                   <div className="mt-0.5 text-slate-900" style={{ overflowWrap: 'anywhere' }}>{activePrediction?.aiSummary}</div>
                 </div>
               </div>
             </div>
 
-            <div className="mt-2 rounded-lg border border-slate-200 bg-white p-2" style={{ pageBreakInside: 'avoid' }}>
-              <div className="mb-1 border-b border-slate-200 pb-1 text-[8.5px] font-bold uppercase tracking-[0.15em] text-[#0F4C81]">
+            <div className="mt-1.5 rounded-lg border border-slate-200 bg-white p-1.5" style={{ pageBreakInside: 'avoid' }}>
+              <div className="mb-1 border-b border-slate-200 pb-0.5 text-[7.5px] font-bold uppercase tracking-[0.15em] text-[#0F4C81]">
                 Clinical Recommendations
               </div>
-              <ul className="m-0 list-none p-0 text-[7px] leading-3 text-slate-700">
+              <ul className="m-0 list-none p-0 text-[6.5px] leading-2.5 text-slate-700">
                 {activePrediction?.recommendations?.map((rec, i) => (
-                  <li key={i} className="mt-1 flex gap-1">
+                  <li key={i} className="mt-0.5 flex gap-1">
                     <span className="text-[#0F4C81]">•</span>
                     <span style={{ overflowWrap: 'anywhere' }}>{rec}</span>
                   </li>
@@ -439,13 +445,11 @@ export const Report: React.FC<ReportProps> = ({ prediction, onNewPrediction, onB
               </ul>
             </div>
 
-            <div className="mt-2 border-t border-slate-200 pt-1 text-center text-[6.5px] leading-3 text-slate-600">
-              <div>-------------------------------------------------------</div>
-              <div>AI-generated diagnostic assistance.</div>
-              <div>This report is for research and educational purposes only.</div>
-              <div>Always consult a qualified medical professional.</div>
-              <div>Generated by CORTEX VISION AI.</div>
-              <div>-------------------------------------------------------</div>
+            <div className="mt-1.5 border-t border-slate-200 pt-1 text-center text-[6px] leading-2.5 text-slate-600">
+              <div>------------------------------------------------------------------------------------------------------------------</div>
+              <div>AI-generated diagnostic assistance. This report is for research and educational purposes only.</div>
+              <div>Always consult a qualified medical professional. Generated by CORTEX VISION AI.</div>
+              <div>------------------------------------------------------------------------------------------------------------------</div>
             </div>
           </div>
         </div>
