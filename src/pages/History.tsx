@@ -142,12 +142,12 @@ export const History: React.FC<HistoryProps> = ({ onViewReport }) => {
               onChange={(e) => setFilterClass(e.target.value)}
               className="bg-transparent text-slate-800 dark:text-slate-200 focus:outline-none cursor-pointer"
             >
-              <option value="ALL">All Categories</option>
-              <option value="TUMOR">Tumor Detected</option>
-              <option value="NORMAL">No Tumor</option>
-              <option value="Glioma">Glioma</option>
-              <option value="Meningioma">Meningioma</option>
-              <option value="Pituitary">Pituitary</option>
+              <option value="ALL" className="bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">All Categories</option>
+              <option value="TUMOR" className="bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">Tumor Detected</option>
+              <option value="NORMAL" className="bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">No Tumor</option>
+              <option value="Glioma" className="bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">Glioma</option>
+              <option value="Meningioma" className="bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">Meningioma</option>
+              <option value="Pituitary" className="bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">Pituitary</option>
             </select>
           </div>
 
