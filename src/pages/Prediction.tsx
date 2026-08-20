@@ -37,7 +37,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
 
   // Image Upload & Sample Selection
   const [mriFile, setMriFile] = useState<File | null>(null);
-  const [mriPreview, setMriPreview] = useState<string>(SAMPLE_MRI_IMAGES.brainGlioma);
+  const [mriPreview, setMriPreview] = useState<string>("");
   const [selectedSampleType, setSelectedSampleType] = useState<TumorType | undefined>(undefined);
   const [isDragging, setIsDragging] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(false);
@@ -91,6 +91,11 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
   };
 
   const handleAnalyze = async () => {
+    if (!mriFile) {
+      alert("Please upload an MRI scan before analyzing.");
+      return;
+    }
+
     setLoading(true);
     setPredictionResult(null);
     setProcessingStage('1/3: Normalizing 224x224 MRI Tensor Matrix...');
@@ -106,7 +111,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
     try {
       const result = await predictionService.predictTumor(
         patient,
-        mriFile || mriPreview,
+        mriFile,
         selectedSampleType
       );
 
@@ -123,7 +128,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
 
   const handleReset = () => {
     setMriFile(null);
-    setMriPreview(SAMPLE_MRI_IMAGES.brainGlioma);
+    setMriPreview("");
     setSelectedSampleType(undefined);
     setPredictionResult(null);
   };
@@ -308,7 +313,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
                 whileHover={{ scale: 1.02, boxShadow: '0 0 25px rgba(6, 182, 212, 0.4)' }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleAnalyze}
-                disabled={loading || !mriPreview}
+                disabled={loading || !mriFile}
                 className="flex-1 flex items-center justify-center space-x-2 py-3.5 rounded-2xl bg-linear-to-r from-cyan-500 via-teal-400 to-cyan-500 hover:from-cyan-400 hover:to-teal-300 text-slate-950 font-extrabold text-sm shadow-lg shadow-cyan-500/25 transition-all cursor-pointer disabled:opacity-50"
               >
                 {loading ? (
