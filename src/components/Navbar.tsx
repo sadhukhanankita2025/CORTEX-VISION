@@ -1,3 +1,4 @@
+// Navbar.tsx
 import React, { useState } from 'react';
 import { Brain, Bell, Menu, X, User as UserIcon, Code2, LogOut, CheckCircle, ChevronDown, Activity } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
@@ -124,7 +125,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Right Action Icons & Controls */}
           <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
 
-            {/* Theme Toggle */}
+            {/* Custom Sliding Gradient Theme Toggle */}
             <ThemeToggle />
 
             {/* Notifications Popover */}
