@@ -77,7 +77,7 @@ npm install
 ## 3️⃣ Start the Frontend
 
 ```bash
-npm run dev
+*npm run dev*
 ```
 
 The frontend will be available at:
@@ -105,7 +105,7 @@ pip install -r requirements.txt
 Start the Flask server:
 
 ```bash
-python app.py
+python app.py***************
 ```
 
 The backend will run at:
