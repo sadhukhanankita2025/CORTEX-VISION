@@ -44,7 +44,7 @@ export const ThemeToggle: React.FC = () => {
       <div
         className={`flex items-center justify-center w-9 h-9 rounded-full shadow-md backdrop-blur-md transform transition-transform duration-300 ease-in-out ${
           isDark 
-            ? 'translate-x-[52px] bg-blue-600/90 text-white shadow-blue-500/30' 
+            ? 'translate-x-13 bg-blue-600/90 text-white shadow-blue-500/30' 
             : 'translate-x-0 bg-amber-500/90 text-white shadow-amber-500/30'
         }`}
       >
