@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Layers, Activity } from 'lucide-react';
+import { Sparkles, Activity } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export const Brain3DVisualizer: React.FC = () => {
@@ -58,8 +58,8 @@ export const Brain3DVisualizer: React.FC = () => {
       >
 
         {/* Subtle Cyber Grid Background */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-100/50 via-white/90 to-white dark:from-cyan-900/40 dark:via-slate-950/90 dark:to-slate-950 pointer-events-none" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#0284c715_1px,transparent_1px),linear-gradient(to_bottom,#0284c715_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-cyan-100/50 via-white/90 to-white dark:from-cyan-900/40 dark:via-slate-950/90 dark:to-slate-950 pointer-events-none" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#0284c715_1px,transparent_1px),linear-gradient(to_bottom,#0284c715_1px,transparent_1px)] bg-size-[20px_20px] pointer-events-none" />
 
         {/* Floating Laser Scanning Line */}
         <div
@@ -120,9 +120,9 @@ export const Brain3DVisualizer: React.FC = () => {
               key={idx}
               onClick={() => setActiveImage(idx)}
               className={`relative h-16 rounded-xl overflow-hidden border transition-all cursor-pointer group/thumb ${activeImage === idx
-                  ? 'border-cyan-500 dark:border-cyan-400 ring-2 ring-cyan-500/40 dark:ring-cyan-400/40 shadow-md scale-102'
-                  : 'border-slate-300 dark:border-slate-800 opacity-70 hover:opacity-100 hover:border-slate-400 dark:hover:border-slate-600'
-                }`}
+                ? 'border-cyan-500 dark:border-cyan-400 ring-2 ring-cyan-500/40 dark:ring-cyan-400/40 shadow-md scale-102'
+                : 'border-slate-300 dark:border-slate-800 opacity-70 hover:opacity-100 hover:border-slate-400 dark:hover:border-slate-600'
+              }`}
             >
               <img
                 src={img.url}

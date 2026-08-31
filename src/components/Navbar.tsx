@@ -39,11 +39,10 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white/90 dark:bg-slate-950/90 border-b border-slate-200 dark:border-slate-800/80 backdrop-blur-xl transition-all shadow-sm dark:shadow-none">
-      {/* Outer wrapper optimized with fluid max-width and responsive padding layout */}
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
 
-          {/* Official Branding Logo & Name - Scaled dynamically across break points */}
+          {/* Official Branding Logo & Name */}
           <div
             onClick={() => handleNav('home')}
             className="flex items-center cursor-pointer group shrink-0 transition-transform hover:scale-[1.02] py-1"
@@ -66,7 +65,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
           </div>
 
-          {/* Desktop/Tablet Navigation Links (Pill Capsule - Visible from LG onwards) */}
+          {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center space-x-1 xl:space-x-1.5 bg-slate-100 dark:bg-slate-900/60 backdrop-blur-md px-2 xl:px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-800/90 shrink-0 shadow-sm dark:shadow-none">
             {navItems.map((item) => {
               const isActive = current === item.id;
@@ -86,13 +85,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             })}
           </nav>
 
-          {/* Right Action Controls (Theme Switcher, Profile/Auth, Mobile Menu Toggle) */}
+          {/* Right Action Controls */}
           <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
-
-            {/* Custom Sliding Gradient Theme Toggle */}
             <ThemeToggle />
 
-            {/* User Profile Avatar / Auth Dropdown */}
             {user ? (
               <div className="relative">
                 <button
@@ -104,7 +100,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     alt="User"
                     className="w-6 h-6 sm:w-7 sm:h-7 rounded-full object-cover"
                   />
-                  <span className="text-xs font-medium hidden md:inline max-w-[90px] truncate">{user.name.split(' ')[0]}</span>
+                  <span className="text-xs font-medium hidden md:inline max-w-22.5 truncate">{user.name.split(' ')[0]}</span>
                   <ChevronDown className="w-3.5 h-3.5 text-slate-400 hidden md:inline shrink-0" />
                 </button>
 
@@ -147,7 +143,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
             )}
 
-            {/* Mobile Hamburger Toggle (Visible on screens smaller than LG) */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle navigation menu"
@@ -160,7 +155,6 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </div>
 
-      {/* Full-width responsive Mobile Drawer Menu with smooth layout wrapping */}
       {mobileMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 w-full bg-white/95 dark:bg-slate-950/95 border-b border-slate-200 dark:border-slate-800 px-4 py-5 shadow-2xl backdrop-blur-2xl space-y-2 animate-in slide-in-from-top-2">
           <div className="grid grid-cols-1 gap-1 max-h-[60vh] overflow-y-auto pr-1">
@@ -185,7 +179,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             })}
           </div>
           
-          {/* Mobile User Profile / Auth Section Footer */}
           <div className="pt-3 mt-3 border-t border-slate-200 dark:border-slate-800">
             {user ? (
               <div className="space-y-2">

@@ -150,14 +150,6 @@ export const MOCK_NOTIFICATIONS: NotificationItem[] = [
     type: 'info',
     read: false
   },
-  {
-    id: 'notif-3',
-    title: 'System Calibration',
-    message: 'Cortex Vision overall model inference accuracy updated to 94.81%.',
-    timestamp: '1 day ago',
-    type: 'info',
-    read: true
-  }
 ];
 
 export const DASHBOARD_STATS = {
@@ -174,10 +166,6 @@ export const DASHBOARD_STATS = {
   monthlyTrend: [
     { month: 'Jan', Scans: 850, Glioma: 310, Meningioma: 220, Pituitary: 180, Normal: 140 },
     { month: 'Feb', Scans: 940, Glioma: 350, Meningioma: 240, Pituitary: 190, Normal: 160 },
-    { month: 'Mar', Scans: 1120, Glioma: 410, Meningioma: 300, Pituitary: 230, Normal: 180 },
-    { month: 'Apr', Scans: 1250, Glioma: 480, Meningioma: 330, Pituitary: 250, Normal: 190 },
-    { month: 'May', Scans: 1400, Glioma: 520, Meningioma: 370, Pituitary: 280, Normal: 230 },
-    { month: 'Jun', Scans: 1580, Glioma: 600, Meningioma: 420, Pituitary: 310, Normal: 250 },
     { month: 'Jul', Scans: 1720, Glioma: 650, Meningioma: 460, Pituitary: 340, Normal: 270 }
   ]
 };
