@@ -43,36 +43,6 @@ export const MOCK_PREDICTIONS: PredictionResult[] = [
     createdAt: '2026-07-28 10:14 AM'
   },
   {
-    id: 'NV-2026-0982',
-    patientId: 'PT-987655',
-    patientName: 'Marcus Thorne',
-    age: 54,
-    gender: 'Male',
-    phone: '+1 (555) 876-5432',
-    email: 'm.thorne@example.com',
-    hospital: 'Mayo Clinic Healthcare',
-    doctor: 'Dr. Robert Chen, MD',
-    examinationDate: '2026-07-30',
-    symptoms: 'Progressive right-sided hearing loss, mild facial numbness.',
-    notes: 'Standard diagnostic protocol T2 MRI scan.',
-    tumorDetected: true,
-    predictionClass: 'Meningioma',
-    confidence: 94.81,
-    inferenceTime: '0.82 sec',
-    modelUsed: 'EfficientNetB0 (best_brain_tumor_model.pth)',
-    mriImageUrl: SAMPLE_MRI_IMAGES.brainMeningioma,
-    heatmapImageUrl: SAMPLE_MRI_IMAGES.brainMeningioma,
-    aiSummary: 'Extra-axial dural-based extra-parenchymal enhancing lesion noted along the sagittal sinus region, characteristic of Meningioma.',
-    recommendations: [
-      'Schedule follow-up MRI in 3 months to monitor expansion velocity.',
-      'Surgical resection evaluation if neurological deficits increase.',
-      'Perform neurological baseline monitoring test.'
-    ],
-    severity: 'Moderate',
-    status: 'Completed',
-    createdAt: '2026-07-30 02:45 PM'
-  },
-  {
     id: 'NV-2026-0983',
     patientId: 'PT-987656',
     patientName: 'Sophia Martinez',
@@ -102,35 +72,6 @@ export const MOCK_PREDICTIONS: PredictionResult[] = [
     status: 'Completed',
     createdAt: '2026-08-01 11:20 AM'
   },
-  {
-    id: 'NV-2026-0984',
-    patientId: 'PT-987657',
-    patientName: 'David K. Miller',
-    age: 29,
-    gender: 'Male',
-    phone: '+1 (555) 998-1122',
-    email: 'd.miller@example.com',
-    hospital: 'Massachusetts General Hospital',
-    doctor: 'Dr. James Patterson, MD',
-    examinationDate: '2026-08-02',
-    symptoms: 'Mild post-concussion routine evaluation, no active focal neurological signs.',
-    notes: 'Volumetric brain scan without intravenous contrast.',
-    tumorDetected: false,
-    predictionClass: 'No Tumor',
-    confidence: 99.15,
-    inferenceTime: '0.69 sec',
-    modelUsed: 'EfficientNetB0 (best_brain_tumor_model.pth)',
-    mriImageUrl: SAMPLE_MRI_IMAGES.brainNormal,
-    heatmapImageUrl: SAMPLE_MRI_IMAGES.brainNormal,
-    aiSummary: 'Parenchymal architecture is preserved without focal signal abnormality, midline shift, or mass effect. Brain parenchyma is within normal radiological limits.',
-    recommendations: [
-      'No neuro-oncological intervention required.',
-      'Routine follow-up per primary physician protocol.'
-    ],
-    severity: 'None',
-    status: 'Completed',
-    createdAt: '2026-08-02 09:05 AM'
-  }
 ];
 
 export const MOCK_NOTIFICATIONS: NotificationItem[] = [
