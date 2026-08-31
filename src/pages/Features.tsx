@@ -1,11 +1,10 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion, Variants } from 'motion/react';
 import {
   Upload, Sparkles, FileText, Clock, Moon, Activity,
-  ShieldCheck, Microscope, Zap, Eye, Cpu, CheckCircle2,
-  Lock, BarChart3, Database, Layers
+  ShieldCheck, Microscope, Zap, Cpu, CheckCircle2,
+  BarChart3
 } from 'lucide-react';
-import { CtaSection } from '../components/CtaSection';
 
 interface FeaturesProps {
   onStartPrediction?: () => void;
@@ -95,7 +94,7 @@ export const Features: React.FC<FeaturesProps> = ({ onStartPrediction }) => {
     }
   ];
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -106,7 +105,7 @@ export const Features: React.FC<FeaturesProps> = ({ onStartPrediction }) => {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
@@ -283,5 +282,3 @@ export const Features: React.FC<FeaturesProps> = ({ onStartPrediction }) => {
     </div>
   );
 };
-
-
