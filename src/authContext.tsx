@@ -4,7 +4,7 @@ import { User } from './types';
 interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
-  login: (userData: string | Partial<User>, role?: User['role']) => void;
+  login: (userData: string | Partial<User>, role?: string | User['role']) => void;
   logout: () => void;
   signup: (userData: Partial<User>) => void;
 }
@@ -33,23 +33,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [user]);
 
-  const login = (userData: string | Partial<User>, roleArg: User['role'] = 'Doctor') => {
+  const login = (userData: string | Partial<User>, roleArg: string | User['role'] = 'Doctor') => {
+    const validRoles: User['role'][] = ['Doctor', 'Researcher', 'Student', 'Admin'];
+    const assignedRole: User['role'] = validRoles.includes(roleArg as User['role']) 
+      ? (roleArg as User['role']) 
+      : 'Doctor';
+
     if (typeof userData === 'string') {
       const newUser: User = {
         id: 'usr-' + Math.floor(1000 + Math.random() * 9000),
         name: userData.split('@')[0].replace('.', ' ').toUpperCase(),
         email: userData,
-        role: roleArg,
+        role: assignedRole,
         hospitalName: 'General Hospital AI Center'
       };
       setUser(newUser);
     } else {
+      const userRole = (userData.role && validRoles.includes(userData.role)) 
+        ? userData.role 
+        : assignedRole;
+
       const newUser: User = {
         id: 'usr-' + Math.floor(1000 + Math.random() * 9000),
-        name: userData.name || (userData.email ? userData.email.split('@')[0] : 'Dr. Medical Specialist'),
-        email: userData.email || 'doctor@hospital.org',
-        role: userData.role || roleArg || 'Doctor',
-        hospitalName: userData.hospitalName || (userData as any).hospital || 'National Neuro-Center'
+        name: userData.name || (userData.email ? userData.email.split('@')[0].toUpperCase() : 'Medical Practitioner'),
+        email: userData.email || 'practitioner@hospital.org',
+        role: userRole,
+        hospitalName: userData.hospitalName || (userData as any).hospital || 'Clinical Neural Network'
       };
       setUser(newUser);
     }
@@ -77,4 +86,3 @@ export const useAuth = () => {
   }
   return context;
 };
-

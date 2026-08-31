@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ThemeProvider } from './themeContext';
+import { ThemeProvider } from './components/themeContext';
 import { AuthProvider, useAuth } from './authContext';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
@@ -12,7 +12,6 @@ import { History } from './pages/History';
 import { Contact } from './pages/Contact';
 import { AuthPage } from './pages/AuthPage';
 import { PredictionResult } from './types';
-import { ShieldAlert } from 'lucide-react';
 
 function AppContent() {
   const [currentPage, setCurrentPage] = useState<string>('home');
@@ -25,6 +24,11 @@ function AppContent() {
   }, [currentPage]);
 
   const handleNavigate = (page: string) => {
+    if (page === 'signup') {
+      setCurrentPage('auth');
+      return;
+    }
+
     if (page === 'prediction' && !isAuthenticated) {
       setCurrentPage('auth');
       return;
@@ -57,7 +61,7 @@ function AppContent() {
       />
 
       {/* Dynamic Page Content */}
-      <main className="flex-grow">
+      <main className="grow">
         {currentPage === 'home' && (
           <Home 
             onStartPrediction={handleStartPrediction} 
@@ -137,4 +141,3 @@ export default function App() {
     </ThemeProvider>
   );
 }
-
