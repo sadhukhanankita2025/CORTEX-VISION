@@ -5,7 +5,6 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
-import { Features } from './pages/Features';
 import { Prediction } from './pages/Prediction';
 import { Report } from './pages/Report';
 import { History } from './pages/History';
@@ -24,7 +23,7 @@ function AppContent() {
   }, [currentPage]);
 
   const handleNavigate = (page: string) => {
-    if (page === 'signup') {
+    if (page === 'signup' || page === 'features') {
       setCurrentPage('auth');
       return;
     }
@@ -72,12 +71,6 @@ function AppContent() {
 
         {currentPage === 'about' && (
           <About 
-            onStartPrediction={handleStartPrediction} 
-          />
-        )}
-
-        {currentPage === 'features' && (
-          <Features 
             onStartPrediction={handleStartPrediction} 
           />
         )}
