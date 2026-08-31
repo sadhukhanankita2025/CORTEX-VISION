@@ -30,7 +30,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
-    { id: 'features', label: 'Features' },
     { id: 'prediction', label: 'Prediction' },
     { id: 'reports', label: 'Reports' },
     { id: 'history', label: 'History' },
