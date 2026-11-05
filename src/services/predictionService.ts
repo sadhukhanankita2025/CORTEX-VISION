@@ -1,10 +1,27 @@
 import { PatientInfo, PredictionResult, TumorType } from '../types';
 import { SAMPLE_MRI_IMAGES } from '../data/mockData';
 
+interface PredictionApiResponse {
+  success: boolean;
+  prediction_class: TumorType;
+  confidence?: number;
+  inference_time_sec?: number;
+  heatmap_url?: string;
+  ai_summary?: string;
+  recommendations?: string[];
+  severity?: PredictionResult['severity'];
+}
+
 // TODO: Connect Python backend
 // TODO: Call /predict endpoint
-// TODO: Load best_brain_tumor_model.pth prediction
+// TODO: Use predictions from hybrid_resnet50_efficientnetb0.keras
 // TODO: Upload MRI image
+
+const isTumorType = (value: unknown): value is TumorType =>
+  value === 'Glioma' ||
+  value === 'Meningioma' ||
+  value === 'Pituitary' ||
+  value === 'No Tumor';
 
 export const predictionService = {
   async predictTumor(
@@ -14,51 +31,61 @@ export const predictionService = {
   ): Promise<PredictionResult> {
     const backendUrl = (import.meta as unknown as { env?: { VITE_API_URL?: string } }).env?.VITE_API_URL || 'http://localhost:5000';
 
-    // 1. TRY REAL PYTHON BACKEND CALL IF FILE IS PROVIDED
+    // Uploaded scans must use the trained model; never report a mock result as an inference.
     if (mriImageFileOrUrl instanceof File) {
-      try {
-        const formData = new FormData();
-        formData.append('file', mriImageFileOrUrl);
+      const formData = new FormData();
+      formData.append('file', mriImageFileOrUrl);
 
-        const response = await fetch(`${backendUrl}/api/predict`, {
-          method: 'POST',
-          body: formData,
-        });
+      const response = await fetch(`${backendUrl}/api/predict`, {
+        method: 'POST',
+        body: formData,
+      });
+      const apiData: Partial<PredictionApiResponse> | null = await response.json();
 
-        if (response.ok) {
-          const apiData = await response.json();
-          const isTumor = apiData.prediction_class !== 'No Tumor';
-
-          return {
-            id: `NV-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`,
-            patientId: patient.patientId || '',
-            patientName: patient.patientName || '',
-            age: typeof patient.age === 'number' ? patient.age : (patient.age ? Number(patient.age) : ''),
-            gender: patient.gender || '',
-            phone: patient.phone || '',
-            email: patient.email || '',
-            hospital: patient.hospital || '',
-            doctor: patient.doctor || '',
-            examinationDate: patient.examinationDate || new Date().toISOString().split('T')[0],
-            symptoms: patient.symptoms || '',
-            notes: patient.notes || 'PyTorch best_brain_tumor_model.pth live backend inference.',
-            tumorDetected: isTumor,
-            predictionClass: apiData.prediction_class as TumorType,
-            confidence: apiData.confidence || 95.0,
-            inferenceTime: `${apiData.inference_time_sec || 0.82} sec`,
-            modelUsed: 'EfficientNetB0 (best_brain_tumor_model.pth)',
-            mriImageUrl: URL.createObjectURL(mriImageFileOrUrl),
-            heatmapImageUrl: apiData.heatmap_url ? `data:image/png;base64,${apiData.heatmap_url}` : URL.createObjectURL(mriImageFileOrUrl),
-            aiSummary: apiData.ai_summary || 'Analysis complete.',
-            recommendations: apiData.recommendations || ['Follow up with radiologist.'],
-            severity: apiData.severity || (isTumor ? 'Moderate' : 'None'),
-            status: 'Completed',
-            createdAt: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' })
-          };
-        }
-      } catch (err) {
-        console.warn('Python backend API unavailable, using local smart fallback engine:', err);
+      if (!response.ok) {
+        const message = typeof apiData === 'object' && apiData !== null && 'error' in apiData
+          ? apiData.error
+          : `Prediction backend returned HTTP ${response.status}.`;
+        throw new Error(typeof message === 'string' ? message : `Prediction backend returned HTTP ${response.status}.`);
       }
+
+      if (
+        apiData === null ||
+        apiData.success !== true ||
+        !isTumorType(apiData.prediction_class)
+      ) {
+        throw new Error('Prediction backend returned an invalid model result.');
+      }
+
+      const isTumor = apiData.prediction_class !== 'No Tumor';
+      const imageUrl = URL.createObjectURL(mriImageFileOrUrl);
+
+      return {
+        id: `NV-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`,
+        patientId: patient.patientId || '',
+        patientName: patient.patientName || '',
+        age: typeof patient.age === 'number' ? patient.age : (patient.age ? Number(patient.age) : ''),
+        gender: patient.gender || '',
+        phone: patient.phone || '',
+        email: patient.email || '',
+        hospital: patient.hospital || '',
+        doctor: patient.doctor || '',
+        examinationDate: patient.examinationDate || new Date().toISOString().split('T')[0],
+        symptoms: patient.symptoms || '',
+        notes: patient.notes || 'Hybrid ResNet50 + EfficientNetB0 live backend inference.',
+        tumorDetected: isTumor,
+        predictionClass: apiData.prediction_class,
+        confidence: apiData.confidence || 95.0,
+        inferenceTime: `${apiData.inference_time_sec || 0.82} sec`,
+        modelUsed: 'Hybrid ResNet50 + EfficientNetB0 (hybrid_resnet50_efficientnetb0.keras)',
+        mriImageUrl: imageUrl,
+        heatmapImageUrl: apiData.heatmap_url ? `data:image/png;base64,${apiData.heatmap_url}` : imageUrl,
+        aiSummary: apiData.ai_summary || 'Analysis complete.',
+        recommendations: apiData.recommendations || ['Follow up with radiologist.'],
+        severity: apiData.severity || (isTumor ? 'Moderate' : 'None'),
+        status: 'Completed',
+        createdAt: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+      };
     }
 
     // 2. MOCK FALLBACK DEMO PIPELINE
@@ -67,23 +94,6 @@ export const predictionService = {
 
     // Determine tumor class for mock demo
     let selectedType: TumorType = sampleType || 'Glioma';
-
-    // If user uploaded a custom file, check filename for tumor clues or default intelligently
-    if (!sampleType && mriImageFileOrUrl instanceof File) {
-      const fileName = mriImageFileOrUrl.name.toLowerCase();
-      if (fileName.includes('no_tumor') || fileName.includes('notumor') || fileName.includes('normal') || fileName.includes('healthy') || fileName.includes('clean')) {
-        selectedType = 'No Tumor';
-      } else if (fileName.includes('meningioma')) {
-        selectedType = 'Meningioma';
-      } else if (fileName.includes('glioma')) {
-        selectedType = 'Glioma';
-      } else if (fileName.includes('pituitary')) {
-        selectedType = 'Pituitary';
-      } else {
-        // Default to No Tumor if clean or filename is neutral, instead of pure random guess
-        selectedType = 'No Tumor';
-      }
-    }
 
     const isTumor = selectedType !== 'No Tumor';
 
@@ -156,7 +166,7 @@ export const predictionService = {
       predictionClass: selectedType,
       confidence: confidences[selectedType],
       inferenceTime: '0.82 sec',
-      modelUsed: 'EfficientNetB0 (best_brain_tumor_model.pth)',
+      modelUsed: 'Hybrid ResNet50 + EfficientNetB0 (hybrid_resnet50_efficientnetb0.keras)',
       mriImageUrl: mriUrl,
       heatmapImageUrl: mriUrl,
       aiSummary: summaries[selectedType],

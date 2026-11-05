@@ -1,12 +1,12 @@
 # CORTEX-VISION
 
-**CORTEX-VISION** is an AI-powered Brain Tumor MRI Classification and Explainability System that enables users to upload brain MRI scans, receive tumor classification predictions, and visualize AI decision-making through explainability techniques. The application combines a modern React frontend with a Flask and PyTorch backend to deliver fast, accurate, and user-friendly predictions.
+**CORTEX-VISION** is an AI-powered Brain Tumor MRI Classification and Explainability System that enables users to upload brain MRI scans, receive tumor classification predictions, and visualize AI decision-making through explainability techniques. The application combines a modern React frontend with a Flask and TensorFlow/Keras backend.
 
 ---
 
 #  Features
 
-*  Brain MRI tumor classification using a trained PyTorch model
+*  Brain MRI tumor classification using a trained hybrid ResNet50 and EfficientNetB0 model
 *  Upload MRI images through an intuitive web interface
 *  Fast real-time predictions
 *  AI explainability visualization
@@ -29,8 +29,8 @@
 
 * Python
 * Flask
-* PyTorch
-* TorchVision
+* TensorFlow
+* Keras
 * OpenCV
 
 ---
@@ -43,6 +43,7 @@ cortex-vision/
 ├── backend/
 │   ├── app.py
 │   ├── requirements.txt
+│   ├── hybrid_resnet50_efficientnetb0.keras
 │   └── best_brain_tumor_model.pth
 │
 ├── public/
@@ -90,6 +91,8 @@ http://localhost:5173
 
 ## 4️⃣ Setup the Backend
 
+Use Python 3.11 or newer for the Keras model runtime. On Windows, select the supported interpreter explicitly:
+
 Navigate to the backend directory:
 
 ```bash
@@ -99,13 +102,13 @@ cd backend
 Install the required Python packages:
 
 ```bash
-pip install -r requirements.txt
+py -3.12 -m pip install -r requirements.txt
 ```
 
 Start the Flask server:
 
 ```bash
-python app.py***************
+py -3.12 app.py
 ```
 
 The backend will run at:
@@ -136,11 +139,13 @@ pip install -r requirements.txt
 
 # 📸 Model
 
-The project uses a trained **PyTorch EfficientNet-based Brain Tumor Classification Model** stored as:
+The backend uses the trained **hybrid ResNet50 + EfficientNetB0 Keras model** stored as:
 
 ```text
-backend/best_brain_tumor_model.pth
+backend/hybrid_resnet50_efficientnetb0.keras
 ```
+
+The existing PyTorch model file is retained for reference and is not used for inference.
 
 # ⭐ Support
 

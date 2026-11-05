@@ -8,7 +8,7 @@ export const SAMPLE_MRI_IMAGES = {
   
   brainMeningioma: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" fill="none"><rect width="500" height="500" fill="%23090d16"/><ellipse cx="250" cy="250" rx="180" ry="210" fill="%231a2333" stroke="%23a855f7" stroke-width="2"/><path d="M250 80 C180 80, 100 150, 100 260 C100 370, 170 410, 250 410 C330 410, 400 370, 400 260 C400 150, 320 80, 250 80 Z" fill="%23141e2e" stroke="%2364748b" stroke-width="3"/><path d="M310 160 Q340 200 330 250" stroke="%23a855f7" stroke-width="24" stroke-linecap="round" opacity="0.85"/><circle cx="320" cy="200" r="28" fill="%23e9d5ff" opacity="0.95"/><text x="20" y="470" fill="%23c084fc" font-family="monospace" font-size="14">MRI SAGITTAL - MENINGIOMA MASS</text></svg>',
 
-  brainPituitary: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" fill="none"><rect width="500" height="500" fill="%23090d16"/><ellipse cx="250" cy="250" rx="180" ry="210" fill="%231a2333" stroke="%23eab308" stroke-width="2"/><path d="M250 80 C180 80, 100 150, 100 260 C100 370, 170 410, 250 410 C330 410, 400 370, 400 260 C400 150, 320 80, 250 80 Z" fill="%23141e2e" stroke="%2364748b" stroke-width="3"/><ellipse cx="250" cy="310" rx="35" ry="25" fill="%23eab308" opacity="0.9"/><ellipse cx="250" cy="310" rx="20" ry="14" fill="%23fef08a" opacity="0.95"/><text x="20" y="470" fill="%23facc15" font-family="monospace" font-size="14">MRI CORONAL - PITUITARY REGION LESION</text></svg>'
+
 };
 
 export const MOCK_PREDICTIONS: PredictionResult[] = [
@@ -29,7 +29,7 @@ export const MOCK_PREDICTIONS: PredictionResult[] = [
     predictionClass: 'Glioma',
     confidence: 96.42,
     inferenceTime: '0.78 sec',
-    modelUsed: 'EfficientNetB0 (best_brain_tumor_model.pth)',
+    modelUsed: 'Hybrid ResNet50 + EfficientNetB0 (hybrid_resnet50_efficientnetb0.keras)',
     mriImageUrl: SAMPLE_MRI_IMAGES.brainGlioma,
     heatmapImageUrl: SAMPLE_MRI_IMAGES.brainGlioma,
     aiSummary: 'Deep feature activation map indicates a high-density hyperintense intra-axial focal lesion in the left frontal lobe consistent with Glioma stage parameters.',
@@ -59,7 +59,7 @@ export const MOCK_PREDICTIONS: PredictionResult[] = [
     predictionClass: 'Pituitary',
     confidence: 95.12,
     inferenceTime: '0.74 sec',
-    modelUsed: 'EfficientNetB0 (best_brain_tumor_model.pth)',
+    modelUsed: 'Hybrid ResNet50 + EfficientNetB0 (hybrid_resnet50_efficientnetb0.keras)',
     mriImageUrl: SAMPLE_MRI_IMAGES.brainPituitary,
     heatmapImageUrl: SAMPLE_MRI_IMAGES.brainPituitary,
     aiSummary: 'Hyper-intense sellar mass expansion pushing superiorly toward optic chiasm detected by CNN spatial feature maps.',
@@ -78,7 +78,7 @@ export const MOCK_NOTIFICATIONS: NotificationItem[] = [
   {
     id: 'notif-1',
     title: 'Model Loaded Successfully',
-    message: 'Local Edge PyTorch model best_brain_tumor_model.pth is ready for inference.',
+    message: 'Local hybrid ResNet50 + EfficientNetB0 Keras model is ready for inference.',
     timestamp: '10 mins ago',
     type: 'success',
     read: false

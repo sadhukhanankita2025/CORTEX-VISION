@@ -193,7 +193,7 @@ export const Home: React.FC<HomeProps> = ({
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} className="flex items-center space-x-2 cursor-pointer">
                   <Cpu className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
-                  <span>best_brain_tumor_model.pth</span>
+                  <span>hybrid_resnet50_efficientnetb0.keras</span>
                 </motion.div>
               </motion.div>
 
@@ -315,7 +315,7 @@ export const Home: React.FC<HomeProps> = ({
                   <span className="text-[10px] text-purple-700 dark:text-purple-300 bg-purple-500/20 px-2 py-0.5 rounded font-mono font-bold border border-purple-500/30">03</span>
                 </div>
                 <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed pl-6">
-                  Instant PyTorch model inference output showing tumor type and confidence score.
+                  Instant hybrid ResNet50 + EfficientNetB0 inference output showing tumor type and confidence score.
                 </p>
               </motion.div>
 

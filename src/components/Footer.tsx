@@ -45,7 +45,7 @@ export const Footer: React.FC<FooterProps> = ({ setActivePage, onNavigate }) => 
           </p>
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white dark:bg-slate-900 border border-cyan-500/30 text-[11px] font-mono text-cyan-700 dark:text-cyan-400 shadow-sm">
             <Activity className="w-3.5 h-3.5 animate-pulse text-cyan-600 dark:text-cyan-400" />
-            <span>PyTorch Model: best_brain_tumor_model.pth</span>
+            <span>Hybrid Keras Model: hybrid_resnet50_efficientnetb0.keras</span>
           </div>
         </div>
 
@@ -79,11 +79,11 @@ export const Footer: React.FC<FooterProps> = ({ setActivePage, onNavigate }) => 
           <ul className="space-y-2 text-xs">
             <li className="text-slate-600 dark:text-slate-400 font-mono flex items-center space-x-1.5">
               <span className="w-1 h-1 rounded-full bg-indigo-500"></span>
-              <span>PyTorch EfficientNetB0 Backbone</span>
+              <span>ResNet50 + EfficientNetB0 Hybrid Backbone</span>
             </li>
             <li className="text-slate-600 dark:text-slate-400 font-mono flex items-center space-x-1.5">
               <span className="w-1 h-1 rounded-full bg-indigo-500"></span>
-              <span>best_brain_tumor_model.pth</span>
+              <span>hybrid_resnet50_efficientnetb0.keras</span>
             </li>
             <li className="text-slate-600 dark:text-slate-400 flex items-center space-x-1.5">
               <span className="w-1 h-1 rounded-full bg-indigo-500"></span>

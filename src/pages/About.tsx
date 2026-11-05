@@ -43,7 +43,7 @@ export const About: React.FC<AboutProps> = ({ onStartPrediction }) => {
           </div>
           <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">1. Deep Learning Architecture</h3>
           <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-            Our underlying PyTorch model <code className="text-cyan-700 dark:text-cyan-300 font-mono font-bold">best_brain_tumor_model.pth</code> utilizes deep convolutional feature extractors combined with attention gates. It classifies MRI scans into four distinct diagnostic buckets: Glioma, Meningioma, Pituitary Tumor, and No Tumor (Normal).
+            Our TensorFlow/Keras model <code className="text-cyan-700 dark:text-cyan-300 font-mono font-bold">hybrid_resnet50_efficientnetb0.keras</code> combines ResNet50 and EfficientNetB0 feature extractors to classify MRI scans as Glioma, Meningioma, Pituitary, or No Tumor.
           </p>
           <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-400 font-mono pt-2">
             <li className="flex items-center space-x-2">
@@ -85,7 +85,7 @@ export const About: React.FC<AboutProps> = ({ onStartPrediction }) => {
           </div>
           <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">3. Rapid Edge Inference</h3>
           <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-            Engineered for edge deployment inside hospital networks or local workstations using ONNX/PyTorch GPU acceleration.
+            Designed for local inference through a Flask API using TensorFlow/Keras.
           </p>
           <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-400 font-mono pt-2">
             <li className="flex items-center space-x-2">
@@ -261,7 +261,7 @@ export const About: React.FC<AboutProps> = ({ onStartPrediction }) => {
                   shows Prediction
                 </h4>
                 <p className="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
-                  PyTorch model computes probability score &amp; Grad-CAM heatmap overlay.
+                  Hybrid Keras model computes the probability score and a heatmap overlay.
                 </p>
               </div>
             </motion.div>
@@ -342,7 +342,7 @@ export const About: React.FC<AboutProps> = ({ onStartPrediction }) => {
               Sub-Second Neural Prediction Pipeline
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-              Every scan is normalized, cropped, and passed through PyTorch inference kernels in under 800 milliseconds, outputting instant multi-class probability scores directly on screen.
+              Every scan is resized to the model's 224x224 input and passed through TensorFlow/Keras inference, producing multi-class probability scores.
             </p>
           </div>
 
@@ -368,8 +368,8 @@ export const About: React.FC<AboutProps> = ({ onStartPrediction }) => {
                 <Cpu className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-xs font-extrabold text-slate-900 dark:text-white">PyTorch Native Engine</div>
-                <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">best_brain_tumor_model.pth</div>
+                <div className="text-xs font-extrabold text-slate-900 dark:text-white">TensorFlow/Keras Engine</div>
+                <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">hybrid_resnet50_efficientnetb0.keras</div>
               </div>
             </motion.div>
           </div>

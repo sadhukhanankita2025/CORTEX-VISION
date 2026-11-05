@@ -10,3 +10,5 @@ grad-cam>=1.4.8
 scikit-learn>=1.2.0
 werkzeug>=2.3.0
 requests>=2.30.0
+tensorflow>=2.19.1
+keras>=3.13.2

@@ -101,7 +101,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
     setProcessingStage('1/3: Normalizing 224x224 MRI Tensor Matrix...');
 
     const stageTimer1 = setTimeout(() => {
-      setProcessingStage('2/3: Executing PyTorch Model (best_brain_tumor_model.pth)...');
+      setProcessingStage('2/3: Executing Hybrid ResNet50 + EfficientNetB0...');
     }, 400);
 
     const stageTimer2 = setTimeout(() => {
@@ -119,6 +119,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
       await historyService.addPrediction(result);
     } catch (err) {
       console.error('Prediction error:', err);
+      alert(err instanceof Error ? err.message : 'The MRI scan could not be analyzed.');
     } finally {
       clearTimeout(stageTimer1);
       clearTimeout(stageTimer2);
@@ -183,7 +184,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
           className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-600/30 dark:border-cyan-500/30 text-cyan-700 dark:text-cyan-400 text-xs font-mono font-semibold shadow-lg shadow-cyan-500/10 backdrop-blur-md"
         >
           <Sparkles className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 animate-spin-slow" />
-          <span>PyTorch Edge AI Diagnostic Pipeline</span>
+          <span>TensorFlow/Keras Edge AI Diagnostic Pipeline</span>
         </motion.div>
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight flex flex-wrap items-center justify-center gap-x-2">
           <span className="text-blue-600 dark:text-blue-400">Brain</span>{" "}
@@ -193,7 +194,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
           <span className="text-blue-600 dark:text-blue-400">Prediction</span>
         </h1>
         <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-          Upload an MRI brain scan to evaluate tumor classification with model <code className="text-cyan-700 dark:text-cyan-300 font-mono font-bold bg-slate-100 dark:bg-slate-900 px-1.5 py-0.5 rounded border border-cyan-300 dark:border-cyan-500/30">best_brain_tumor_model.pth</code>.
+          Upload an MRI brain scan to evaluate tumor classification with model <code className="text-cyan-700 dark:text-cyan-300 font-mono font-bold bg-slate-100 dark:bg-slate-900 px-1.5 py-0.5 rounded border border-cyan-300 dark:border-cyan-500/30">hybrid_resnet50_efficientnetb0.keras</code>.
         </p>
       </motion.div>
 
@@ -297,7 +298,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
                         </div>
                         <div className="text-[11px] text-slate-600 dark:text-slate-400 font-mono space-y-1">
                           <p>• Resolution: 224 x 224 Normalized Tensor</p>
-                          <p>• Target Model: <span className="text-cyan-700 dark:text-cyan-300 font-bold">best_brain_tumor_model.pth</span></p>
+                          <p>• Target Model: <span className="text-cyan-700 dark:text-cyan-300 font-bold">hybrid_resnet50_efficientnetb0.keras</span></p>
                           <p>• Preprocessing: Z-score scaling + Skull Stripping</p>
                         </div>
                       </div>
@@ -693,7 +694,7 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
                   <div className="space-y-1">
                     <h4 className="text-sm font-bold text-slate-900 dark:text-white">Awaiting Analysis</h4>
                     <p className="text-xs text-slate-600 dark:text-slate-400 max-w-xs mx-auto">
-                      Click "Analyze MRI Scan" above to run prediction on <code className="text-cyan-700 dark:text-cyan-300 font-mono">best_brain_tumor_model.pth</code>.
+                      Click "Analyze MRI Scan" above to run prediction on <code className="text-cyan-700 dark:text-cyan-300 font-mono">hybrid_resnet50_efficientnetb0.keras</code>.
                     </p>
                   </div>
                 </motion.div>
@@ -702,8 +703,8 @@ export const Prediction: React.FC<PredictionProps> = ({ onPredictionComplete, on
 
             {/* Code Integration Note */}
             <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/90 border border-blue-100 dark:border-slate-800 text-[10px] font-mono text-slate-500 space-y-0.5">
-              <p className="text-indigo-600 dark:text-indigo-300">// PyTorch backend integration active</p>
-              <p className="text-indigo-600 dark:text-indigo-300">// Model weight: best_brain_tumor_model.pth</p>
+              <p className="text-indigo-600 dark:text-indigo-300">// TensorFlow/Keras backend integration active</p>
+              <p className="text-indigo-600 dark:text-indigo-300">// Model: hybrid_resnet50_efficientnetb0.keras</p>
             </div>
 
           </motion.div>

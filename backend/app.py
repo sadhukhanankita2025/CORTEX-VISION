@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import io
 import base64
@@ -9,84 +10,72 @@ from flask_cors import CORS
 from PIL import Image, ImageEnhance, ImageFilter
 import numpy as np
 
-# PyTorch & Torchvision Imports (with safety fallback for standalone execution)
+# TensorFlow & Keras Imports
 try:
-    import torch
-    import torch.nn as nn
-    import torchvision.transforms as transforms
-    from torchvision import models
-    TORCH_AVAILABLE = True
+    import tensorflow as tf
+    TENSORFLOW_AVAILABLE = True
 except ImportError:
-    TORCH_AVAILABLE = False
-    print("Warning: PyTorch/Torchvision not installed in current environment. Using simulated neural network inference mode.")
+    TENSORFLOW_AVAILABLE = False
+    print("TensorFlow is not installed. The hybrid Keras model will be unavailable.")
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-# Class labels for Brain MRI Tumor Classification
+# Class labels for Brain MRI Tumor Classification, in model output order.
 CLASS_NAMES = ['Glioma', 'Meningioma', 'No Tumor', 'Pituitary']
 
-MODEL_PATH = os.path.join(os.path.dirname(__file__), 'best_brain_tumor_model.pth')
-device = 'cuda' if (TORCH_AVAILABLE and torch.cuda.is_available()) else 'cpu'
+MODEL_NAME = 'hybrid_resnet50_efficientnetb0.keras'
+MODEL_PATH = os.path.join(os.path.dirname(__file__), MODEL_NAME)
 
 model = None
+model_load_error = None
 
 def load_brain_tumor_model():
-    """Load the checkpoint if possible and fall back gracefully when the environment is incompatible."""
-    global model
-    if not TORCH_AVAILABLE:
+    """Load the trained hybrid ResNet50/EfficientNetB0 Keras model."""
+    global model, model_load_error
+    if not TENSORFLOW_AVAILABLE:
+        model_load_error = "TensorFlow is not installed. Use Python 3.12 and install backend/requirements.txt."
+        print(model_load_error)
+        return None
+
+    if not os.path.isfile(MODEL_PATH):
+        model_load_error = f"Model file not found: {MODEL_PATH}"
+        print(model_load_error)
         return None
 
     try:
-        model = models.densenet121(weights=None)
-        in_features = model.classifier.in_features
-        model.classifier = nn.Linear(in_features, len(CLASS_NAMES))
-
-        if os.path.exists(MODEL_PATH):
-            print(f"Loading weights from {MODEL_PATH}...")
-            state_dict = torch.load(MODEL_PATH, map_location=device)
-            if isinstance(state_dict, dict) and 'state_dict' in state_dict:
-                state_dict = state_dict['state_dict']
-            if isinstance(state_dict, dict):
-                state_dict = {k.replace('module.', ''): v for k, v in state_dict.items()}
-            incompatible = model.load_state_dict(state_dict, strict=False)
-            missing = sorted(incompatible.missing_keys)
-            unexpected = sorted(incompatible.unexpected_keys)
-            if missing or unexpected:
-                print(f"Checkpoint loaded with compatibility warnings. Missing: {missing[:10]} Unexpected: {unexpected[:10]}")
-            else:
-                print("Successfully loaded custom best_brain_tumor_model.pth weights!")
-        else:
-            print(f"Model file {MODEL_PATH} not found. Running initialized DenseNet-121 in evaluation mode.")
-
-        model.to(device)
-        model.eval()
+        model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+        model_load_error = None
+        print(f"Successfully loaded {MODEL_NAME}.")
         return model
     except Exception as e:
-        print(f"Error initializing PyTorch model: {e}")
         model = None
+        model_load_error = (
+            f"Could not load {MODEL_NAME} with Python {sys.version_info.major}.{sys.version_info.minor}, "
+            f"TensorFlow {tf.__version__}, and Keras {tf.keras.__version__}: {e}. "
+            "Use Python 3.12, then run `py -3.12 -m pip install -r requirements.txt` "
+            "and start with `py -3.12 app.py` from the backend folder."
+        )
+        print(f"Error loading {MODEL_NAME}: {model_load_error}")
         return None
+
+# Legacy PyTorch model loader retained for reference:
+# MODEL_PATH = os.path.join(os.path.dirname(__file__), 'best_brain_tumor_model.pth')
+# device = 'cuda' if (torch.cuda.is_available()) else 'cpu'
+# model = models.densenet121(weights=None)
+# model.classifier = nn.Linear(model.classifier.in_features, len(CLASS_NAMES))
+# state_dict = torch.load(MODEL_PATH, map_location=device)
+# model.load_state_dict(state_dict, strict=False)
+# model.to(device)
+# model.eval()
 
 # Pre-load model on startup
 load_brain_tumor_model()
 
-# Image Transformations for Brain MRI PyTorch Model
-if TORCH_AVAILABLE:
-    transform_pipeline = transforms.Compose([
-        transforms.Resize((224, 224)),
-        transforms.ToTensor(),
-        transforms.Normalize(
-            mean=[0.485, 0.456, 0.406],
-            std=[0.229, 0.224, 0.225]
-        )
-    ])
-
-
 def prepare_mri_input(image: Image.Image):
-    """Convert an uploaded MRI image into a model-ready batch tensor."""
-    rgb_image = image.convert('RGB')
-    tensor = transform_pipeline(rgb_image)
-    return tensor.unsqueeze(0).to(device)
+    """Convert an uploaded MRI image into the Keras model's 224x224 RGB input."""
+    rgb_image = image.convert('RGB').resize((224, 224))
+    return np.expand_dims(np.asarray(rgb_image, dtype=np.float32), axis=0)
 
 def generate_gradcam_heatmap(image: Image.Image, pred_class: str) -> str:
     """
@@ -183,7 +172,7 @@ def index():
     return jsonify({
         "status": "online",
         "service": "Brain MRI AI Tumor Prediction API",
-        "model": "best_brain_tumor_model.pth (PyTorch EfficientNet-B0)",
+        "model": f"{MODEL_NAME} (Hybrid ResNet50 + EfficientNetB0)",
         "classes": CLASS_NAMES,
         "endpoints": {
             "health": "/api/health",
@@ -195,11 +184,12 @@ def index():
 @app.route('/api/health', methods=['GET'])
 def health():
     return jsonify({
-        "status": "healthy",
-        "pytorch_available": TORCH_AVAILABLE,
-        "device": str(device),
+        "status": "healthy" if model is not None else "unavailable",
+        "tensorflow_available": TENSORFLOW_AVAILABLE,
+        "device": "GPU" if TENSORFLOW_AVAILABLE and tf.config.list_physical_devices('GPU') else "CPU",
         "model_loaded": model is not None,
-        "model_path_exists": os.path.exists(MODEL_PATH)
+        "model_path_exists": os.path.isfile(MODEL_PATH),
+        "model_error": model_load_error
     })
 
 
@@ -215,47 +205,27 @@ def predict():
     if not file or file.filename == '':
         return jsonify({"error": "Empty file uploaded."}), 400
 
+    if model is None:
+        return jsonify({
+            "success": False,
+            "error": model_load_error or f"The {MODEL_NAME} model is unavailable. Check backend startup logs."
+        }), 503
+
     try:
         # Read image from memory
         image_bytes = file.read()
         pil_image = Image.open(io.BytesIO(image_bytes)).convert('RGB')
 
-        pred_class = 'No Tumor'
-        confidence = 95.0
+        probabilities = np.asarray(
+            model(prepare_mri_input(pil_image), training=False)[0],
+            dtype=np.float32
+        )
+        if probabilities.shape != (len(CLASS_NAMES),) or not np.isfinite(probabilities).all():
+            raise ValueError(f"Model returned invalid class probabilities: {probabilities}")
 
-        # Run inference using PyTorch model if available
-        if TORCH_AVAILABLE and model is not None:
-            input_tensor = prepare_mri_input(pil_image)
-            with torch.no_grad():
-                outputs = model(input_tensor)
-                probabilities = torch.nn.functional.softmax(outputs[0], dim=0)
-                top_prob, top_catid = torch.topk(probabilities, 1)
-
-                idx = top_catid.item()
-                if 0 <= idx < len(CLASS_NAMES):
-                    pred_class = CLASS_NAMES[idx]
-                    confidence = round(float(top_prob.item()) * 100, 2)
-                else:
-                    pred_class = 'No Tumor'
-                    confidence = 95.0
-        else:
-            # Smart fallback inference logic based on image properties and filename clues
-            file_name = file.filename.lower()
-            if 'glioma' in file_name:
-                pred_class = 'Glioma'
-                confidence = 96.42
-            elif 'meningioma' in file_name:
-                pred_class = 'Meningioma'
-                confidence = 94.81
-            elif 'pituitary' in file_name:
-                pred_class = 'Pituitary'
-                confidence = 95.12
-            elif any(k in file_name for k in ['no_tumor', 'notumor', 'normal', 'clean', 'healthy']):
-                pred_class = 'No Tumor'
-                confidence = 99.15
-            else:
-                pred_class = 'No Tumor'
-                confidence = 97.50
+        idx = int(np.argmax(probabilities))
+        pred_class = CLASS_NAMES[idx]
+        confidence = round(float(probabilities[idx]) * 100, 2)
 
         inference_time = round(time.time() - start_time, 3)
         heatmap_base64 = generate_gradcam_heatmap(pil_image, pred_class)
@@ -266,7 +236,7 @@ def predict():
             "prediction_class": pred_class,
             "confidence": confidence,
             "inference_time_sec": max(inference_time, 0.25),
-            "model_used": "PyTorch EfficientNetB0 (best_brain_tumor_model.pth)",
+            "model_used": f"Hybrid ResNet50 + EfficientNetB0 ({MODEL_NAME})",
             "heatmap_url": heatmap_base64,
             "ai_summary": insights['summary'],
             "recommendations": insights['recommendations'],

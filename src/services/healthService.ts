@@ -1,7 +1,7 @@
 import { HealthCheckStatus } from '../types';
 
 // TODO: Connect Python backend
-// TODO: Call /health endpoint to verify PyTorch model best_brain_tumor_model.pth loaded in memory
+// TODO: Call /api/health to verify the hybrid Keras model loaded in memory
 
 export const healthService = {
   async checkBackendHealth(): Promise<HealthCheckStatus> {
@@ -23,8 +23,8 @@ export const healthService = {
     return {
       status: 'mock',
       modelLoaded: true,
-      modelName: 'EfficientNetB0 / CNN ResNet',
-      modelPath: 'model/best_brain_tumor_model.pth',
+      modelName: 'Hybrid ResNet50 + EfficientNetB0',
+      modelPath: 'backend/hybrid_resnet50_efficientnetb0.keras',
       backendUrl: 'http://localhost:5000/api/v1',
       device: 'CUDA:0 (NVIDIA RTX 4090 / Edge GPU)'
     };

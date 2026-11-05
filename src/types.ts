@@ -21,7 +21,7 @@ export interface PredictionResult {
   predictionClass: TumorType;
   confidence: number; // e.g. 94.81
   inferenceTime: string; // e.g. "0.82 sec"
-  modelUsed: string; // e.g. "EfficientNetB0 (best_brain_tumor_model.pth)"
+  modelUsed: string; // e.g. "Hybrid ResNet50 + EfficientNetB0"
 
   // Images
   mriImageUrl: string;
