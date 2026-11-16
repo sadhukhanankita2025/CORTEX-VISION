@@ -1,5 +1,26 @@
 import os
 import sys
+
+if sys.version_info < (3, 12):
+    if os.name == 'nt':
+        import shutil
+        import subprocess
+
+        python_launcher = shutil.which('py')
+        if python_launcher:
+            print('Restarting backend with Python 3.12...')
+            raise SystemExit(subprocess.call([
+                python_launcher,
+                '-3.12',
+                os.path.abspath(__file__),
+                *sys.argv[1:]
+            ]))
+
+    raise SystemExit(
+        'This model requires Python 3.12. Install Python 3.12 and run `python app.py`; '
+        'on Windows, the Python launcher will select it automatically.'
+    )
+
 import time
 import io
 import base64
@@ -256,4 +277,4 @@ def predict():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     print(f"Starting Brain MRI AI Tumor Prediction API backend on port {port}...")
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(host='0.0.0.0', port=port, debug=False)

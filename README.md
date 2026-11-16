@@ -43,8 +43,7 @@ cortex-vision/
 ├── backend/
 │   ├── app.py
 │   ├── requirements.txt
-│   ├── hybrid_resnet50_efficientnetb0.keras
-│   └── best_brain_tumor_model.pth
+│   └── hybrid_resnet50_efficientnetb0.keras
 │
 ├── public/
 ├── src/
@@ -78,20 +77,20 @@ npm install
 ## 3️⃣ Start the Frontend
 
 ```bash
-*npm run dev*
+npm run dev
 ```
 
 The frontend will be available at:
 
 ```text
-http://localhost:5173
+http://localhost:3000
 ```
 
 ---
 
 ## 4️⃣ Setup the Backend
 
-Use Python 3.11 or newer for the Keras model runtime. On Windows, select the supported interpreter explicitly:
+Use Python 3.12 for the Keras model runtime. The model file uses Keras serialization features that are not supported by older installed Keras versions. Install the packages for Python 3.12 once:
 
 Navigate to the backend directory:
 
@@ -108,7 +107,7 @@ py -3.12 -m pip install -r requirements.txt
 Start the Flask server:
 
 ```bash
-py -3.12 app.py
+python app.py
 ```
 
 The backend will run at:
@@ -116,6 +115,8 @@ The backend will run at:
 ```text
 http://localhost:5000
 ```
+
+When `python` points to an older version on Windows, the app automatically restarts itself with Python 3.12. You can use `python app.py` every time. Stop any already-running backend with `Ctrl+C` before restarting; only one backend can use port 5000. From the repository root, `npm run dev:backend` uses the same automatic selection.
 
 ---
 
@@ -132,7 +133,7 @@ npm run build
 Install all required Python libraries using:
 
 ```bash
-pip install -r requirements.txt
+py -3.12 -m pip install -r backend/requirements.txt
 ```
 
 ---
