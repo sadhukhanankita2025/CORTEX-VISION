@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import type { Variants } from 'framer-motion';
+import type { Variants } from 'motion/react';
 import { Brain3DVisualizer } from '../components/Brain3DVisualizer';
 import { CtaSection } from '../components/CtaSection';
 import {
@@ -214,7 +214,6 @@ export const Home: React.FC<HomeProps> = ({
       </section>
 
       {/* SYSTEM WORKFLOW ARCHITECTURE SECTION */}
-      {/* SYSTEM WORKFLOW ARCHITECTURE SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -310,7 +309,7 @@ export const Home: React.FC<HomeProps> = ({
                 <div className="flex items-center justify-between">
                   <span className="flex items-center space-x-2.5 font-bold text-sm text-slate-900 dark:text-white">
                     <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400 group-hover:scale-125 transition-transform shrink-0" />
-                    <span>shows Prediction</span>
+                    <span>Shows Prediction</span>
                   </span>
                   <span className="text-[10px] text-purple-700 dark:text-purple-300 bg-purple-500/20 px-2 py-0.5 rounded font-mono font-bold border border-purple-500/30">03</span>
                 </div>
@@ -333,7 +332,7 @@ export const Home: React.FC<HomeProps> = ({
                 <div className="flex items-center justify-between">
                   <span className="flex items-center space-x-2.5 font-bold text-sm text-slate-900 dark:text-white">
                     <FileDown className="w-4 h-4 text-emerald-600 dark:text-emerald-400 group-hover:scale-125 transition-transform shrink-0" />
-                    <span>User downloads Report</span>
+                    <span>User Downloads Report</span>
                   </span>
                   <span className="text-[10px] text-emerald-700 dark:text-emerald-300 bg-emerald-500/20 px-2 py-0.5 rounded font-mono font-bold border border-emerald-500/30">04</span>
                 </div>
@@ -456,6 +455,6 @@ export const Home: React.FC<HomeProps> = ({
       {/* CTA SECTION */}
       <CtaSection onStartPrediction={onStartPrediction} />
 
-    </div >
+    </div>
   );
 };
